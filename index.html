@@ -497,6 +497,7 @@
 
   .venue-link{
     display:flex;
+    color:rgba(255,248,231,0.9);
     align-items:flex-start;
     gap:0.8rem;
     text-decoration:none;
@@ -507,7 +508,10 @@
     transition:transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
 
+  .venue-link:visited{color:rgba(255,248,231,0.9);}
+
   .venue-link:hover{
+    color:var(--cream);
     transform:translateY(-2px);
     box-shadow:0 16px 40px rgba(212,168,67,0.12);
     border-color:rgba(240,214,138,0.45);
@@ -784,6 +788,7 @@
 
   .mini-venue{
     text-decoration:none;
+    color:rgba(255,248,231,0.9);
     border-radius:16px;
     padding:0.95rem 1rem;
     border:1px solid rgba(212,168,67,0.22);
@@ -794,7 +799,10 @@
     align-items:flex-start;
   }
 
+  .mini-venue:visited{color:rgba(255,248,231,0.9);}
+
   .mini-venue:hover{
+    color:var(--cream);
     transform:translateY(-2px);
     box-shadow:0 16px 40px rgba(212,168,67,0.12);
     border-color:rgba(240,214,138,0.45);
@@ -1019,7 +1027,7 @@
         <a class="venue-link" href="https://maps.app.goo.gl/FQKFRbEKMEjorat6A" target="_blank" rel="noopener">
           <div class="venue-badge">G</div>
           <div class="venue-text">
-            <div class="venue-title">Groom Mandapam</div>
+            <div class="venue-title">Ekessh Mandapam</div>
             <div class="venue-name">Agarwal Bhavan</div>
             <div class="venue-hint">Tap to open in Google Maps</div>
           </div>
@@ -1028,7 +1036,7 @@
         <a class="venue-link" href="https://maps.app.goo.gl/nCtcwhEfbF7FTLUS7" target="_blank" rel="noopener">
           <div class="venue-badge">B</div>
           <div class="venue-text">
-            <div class="venue-title">Bride Mandapam</div>
+            <div class="venue-title">Keertanaa Mandapam</div>
             <div class="venue-name">Aaru Nadu Arangam</div>
             <div class="venue-hint">Tap to open in Google Maps</div>
           </div>
@@ -1062,8 +1070,8 @@
 
   <div class="timeline-wrap">
     <p class="timeline-intro scroll-reveal" style="transition-delay:0.15s;">
-      Two sacred spaces, one celebration. Groom relatives will gather at the Groom Mandapam, and Bride relatives will gather at the Bride Mandapam.
-      The rituals flow across both venues, and the union is completed at the Bride Mandapam.
+      Two sacred spaces, one celebration. Ekessh relatives will gather at the Ekessh Mandapam, and Keertanaa relatives will gather at the Keertanaa Mandapam.
+      The rituals flow across both venues, and the union is completed at the Keertanaa Mandapam.
     </p>
 
     <div class="timeline">
@@ -1081,17 +1089,17 @@
             <a class="mini-venue" href="https://maps.app.goo.gl/FQKFRbEKMEjorat6A" target="_blank" rel="noopener">
               <span class="mini-dot"></span>
               <span>
-                <strong>Groom Mandapam</strong><br>
+                <strong>Ekessh Mandapam</strong><br>
                 Agarwal Bhavan
-                <span class="small">Gathering for Groom relatives, and select evening rituals</span>
+                <span class="small">Gathering for Ekessh relatives, and select evening rituals</span>
               </span>
             </a>
             <a class="mini-venue" href="https://maps.app.goo.gl/nCtcwhEfbF7FTLUS7" target="_blank" rel="noopener">
               <span class="mini-dot"></span>
               <span>
-                <strong>Bride Mandapam</strong><br>
+                <strong>Keertanaa Mandapam</strong><br>
                 Aaru Nadu Arangam
-                <span class="small">Gathering for Bride relatives, and select evening rituals</span>
+                <span class="small">Gathering for Keertanaa relatives, and select evening rituals</span>
               </span>
             </a>
           </div>
@@ -1105,8 +1113,8 @@
         </div>
         <div class="t-title">Kasi Yatra, The Sacred Journey</div>
         <div class="t-body">
-          The Groom begins the Kasi Yatra, a symbolic walk of purpose and inner resolve, setting out from the Groom side.
-          The procession moves towards the Bride Mandapam as families gather in devotion and joy.
+          Ekessh begins the Kasi Yatra, a symbolic walk of purpose and inner resolve, setting out from the Ekessh side.
+          The procession moves towards the Keertanaa Mandapam as families gather in devotion and joy.
         </div>
       </div>
 
@@ -1115,10 +1123,10 @@
           <div class="t-date">May 29, 2026</div>
           <div class="t-time">6:00 AM to 7:25 AM</div>
         </div>
-        <div class="t-title">The Promise and the Wedding at the Bride Mandapam</div>
+        <div class="t-title">The Promise and the Wedding at the Keertanaa Mandapam</div>
         <div class="t-body">
-          At the entrance of the Bride Mandapam, the Bride’s father invites the Groom to step into married life with his daughter.
-          The Groom agrees, and the marriage is solemnized at the Bride Mandapam during the Muhurtham.
+          At the entrance of the Keertanaa Mandapam, the Keertanaa’s father invites Ekessh to step into married life with his daughter.
+          Ekessh agrees, and the marriage is solemnized at the Keertanaa Mandapam during the Muhurtham.
           <div class="event-venues" style="margin-top:0.9rem;">
             <a class="mini-venue" href="https://maps.app.goo.gl/nCtcwhEfbF7FTLUS7" target="_blank" rel="noopener">
               <span class="mini-dot"></span>
@@ -1444,11 +1452,11 @@ function buildWeddingIcs(){
   const descriptionCommon=
     'Wedding celebrations of T.K.S. Ekessh and N.K. Keertanaa.\\n\\n'+
     'Venues (Google Maps):\\n'+
-    'Groom Mandapam: Agarwal Bhavan '+groomMap+'\\n'+
-    'Bride Mandapam: Aaru Nadu Arangam '+brideMap+'\\n\\n'+
-    'Gathering: Groom relatives at Groom Mandapam, Bride relatives at Bride Mandapam.\\n\\n'+
+    'Ekessh Mandapam: Agarwal Bhavan '+groomMap+'\\n'+
+    'Keertanaa Mandapam: Aaru Nadu Arangam '+brideMap+'\\n\\n'+
+    'Gathering: Ekessh relatives at Ekessh Mandapam, Keertanaa relatives at Keertanaa Mandapam.\\n\\n'+
     'Reception: May 28, 6:00 PM, shared rituals across both venues.\\n'+
-    'Wedding: May 29, Kasi Yatra begins, then marriage at Bride Mandapam during Muhurtham.';
+    'Wedding: May 29, Kasi Yatra begins, then marriage at Keertanaa Mandapam during Muhurtham.';
 
   const dtstamp=formatIcsUTC(new Date());
 
@@ -1466,7 +1474,7 @@ function buildWeddingIcs(){
     'DTEND:'+formatIcsUTC(recEnd),
     'SUMMARY:Reception of Ekessh and Keertanaa',
     'DESCRIPTION:'+descriptionCommon,
-    'LOCATION:Groom Mandapam (Agarwal Bhavan) and Bride Mandapam (Aaru Nadu Arangam)',
+    'LOCATION:Ekessh Mandapam (Agarwal Bhavan) and Keertanaa Mandapam (Aaru Nadu Arangam)',
     'URL:'+groomMap,
     'STATUS:CONFIRMED',
     'END:VEVENT',
@@ -1478,7 +1486,7 @@ function buildWeddingIcs(){
     'DTEND:'+formatIcsUTC(wedEnd),
     'SUMMARY:Wedding of Ekessh and Keertanaa',
     'DESCRIPTION:'+descriptionCommon,
-    'LOCATION:Aaru Nadu Arangam (Bride Mandapam), Madurai, Tamil Nadu, India',
+    'LOCATION:Aaru Nadu Arangam (Keertanaa Mandapam), Madurai, Tamil Nadu, India',
     'URL:'+brideMap,
     'STATUS:CONFIRMED',
 
@@ -1521,16 +1529,16 @@ function buildGoogleCalendarLink(){
 
   const details=encodeURIComponent(
     'Venues (Google Maps):\n'+
-    'Groom Mandapam, Agarwal Bhavan: '+groomMap+'\n'+
-    'Bride Mandapam, Aaru Nadu Arangam: '+brideMap+'\n\n'+
+    'Ekessh Mandapam, Agarwal Bhavan: '+groomMap+'\n'+
+    'Keertanaa Mandapam, Aaru Nadu Arangam: '+brideMap+'\n\n'+
     'Gathering:\n'+
-    'Groom relatives at Groom Mandapam.\n'+
-    'Bride relatives at Bride Mandapam.\n\n'+
+    'Ekessh relatives at Ekessh Mandapam.\n'+
+    'Keertanaa relatives at Keertanaa Mandapam.\n\n'+
     'Reception: May 28, 6:00 PM, shared rituals across both venues.\n'+
-    'Wedding: May 29, Kasi Yatra begins, then marriage at Bride Mandapam during Muhurtham.'
+    'Wedding: May 29, Kasi Yatra begins, then marriage at Keertanaa Mandapam during Muhurtham.'
   );
 
-  const location=encodeURIComponent('Aaru Nadu Arangam, Madurai, Tamil Nadu, India (Bride Mandapam)');
+  const location=encodeURIComponent('Aaru Nadu Arangam, Madurai, Tamil Nadu, India (Keertanaa Mandapam)');
 
   return 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
     '&text=' + title +
