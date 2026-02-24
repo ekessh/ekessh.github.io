@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekessh & Keertanaa — Wedding Celebration</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4A843;
+    --gold-light: #F0D68A;
+    --gold-dark: #A07830;
+    --crimson: #C62828;
+    --crimson-dark: #8E0000;
+    --cream: #FFF8E7;
+    --deep-maroon: #3D0000;
+    --saffron: #FF6F00;
+    --rose: #E91E63;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) var(--deep-maroon);
+  }
+
+  body {
+    background: var(--deep-maroon);
+    color: var(--cream);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ===================== HERO SECTION ===================== */
+  #hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  #three-canvas {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(ellipse at center, rgba(61,0,0,0.2) 0%, rgba(61,0,0,0.85) 100%);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    animation: fadeInUp 2s ease-out;
+  }
+
+  .om-symbol {
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 30px rgba(212,168,67,0.6);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  .sri-text {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.5em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .couple-names {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3rem, 8vw, 7rem);
+    color: var(--gold-light);
+    text-shadow: 0 0 60px rgba(212,168,67,0.4), 0 4px 20px rgba(0,0,0,0.5);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .couple-names .amp {
+    display: block;
+    font-size: 0.5em;
+    color: var(--gold);
+    margin: -0.2em 0;
+  }
+
+  .wedding-date-hero {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    letter-spacing: 0.3em;
+    color: var(--cream);
+    margin-top: 1rem;
+    opacity: 0.9;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    z-index: 2;
+    animation: bounce 2s ease-in-out infinite;
+    cursor: pointer;
+  }
+
+  .scroll-indicator svg {
+    width: 30px;
+    height: 30px;
+    fill: var(--gold);
+    opacity: 0.6;
+  }
+
+  /* ===================== DECORATIVE DIVIDER ===================== */
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem 0;
+    color: var(--gold);
+    font-size: 1.5rem;
+  }
+
+  .divider-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  /* ===================== SECTIONS ===================== */
+  section {
+    position: relative;
+    padding: 5rem 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--gold);
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 40px rgba(212,168,67,0.3);
+  }
+
+  /* ===================== INVITATION SECTION ===================== */
+  .invitation-card {
+    background: linear-gradient(135deg, rgba(61,0,0,0.8), rgba(100,20,20,0.6));
+    border: 1px solid rgba(212,168,67,0.3);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(212,168,67,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .invitation-card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    border-radius: 22px;
+    background: linear-gradient(45deg, var(--gold), transparent, var(--gold), transparent);
+    z-index: -1;
+    opacity: 0.3;
+  }
+
+  .parents-text {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: rgba(255,248,231,0.85);
+    margin-bottom: 1.5rem;
+  }
+
+  .parents-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.2rem;
+    color: var(--gold-light);
+  }
+
+  .invite-message {
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: rgba(255,248,231,0.9);
+    margin: 1.5rem 0 2rem;
+  }
+
+  .groom-bride-section {
+    margin: 2rem 0;
+  }
+
+  .person-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .person-name {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: var(--gold-light);
+    text-shadow: 0 0 30px rgba(212,168,67,0.3);
+  }
+
+  .person-details {
+    font-size: 0.95rem;
+    color: rgba(255,248,231,0.7);
+    margin-top: 0.3rem;
+  }
+
+  .heart-divider {
+    font-size: 2rem;
+    color: var(--rose);
+    margin: 1.5rem 0;
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+
+  /* ===================== VENUE & DATE SECTION ===================== */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    .info-grid { grid-template-columns: 1fr; }
+  }
+
+  .info-card {
+    background: linear-gradient(145deg, rgba(100,20,20,0.5), rgba(61,0,0,0.8));
+    border: 1px solid rgba(212,168,67,0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(212,168,67,0.15);
+  }
+
+  .info-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212,168,67,0.05), transparent);
+    transition: left 0.6s ease;
+  }
+
+  .info-card:hover::after { left: 100%; }
+
+  .info-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .info-label {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.8rem;
+  }
+
+  .info-value {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--cream);
+  }
+
+  .info-value strong {
+    color: var(--gold-light);
+  }
+
+  /* ===================== COUNTDOWN ===================== */
+  .countdown-section {
+    text-align: center;
+    padding: 4rem 1.5rem;
+  }
+
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .countdown-item {
+    background: linear-gradient(145deg, rgba(100,20,20,0.6), rgba(61,0,0,0.9));
+    border: 1px solid rgba(212,168,67,0.25);
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    min-width: 100px;
+    transition: transform 0.3s ease;
+  }
+
+  .countdown-item:hover { transform: scale(1.05); }
+
+  .countdown-number {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(212,168,67,0.4);
+  }
+
+  .countdown-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,248,231,0.6);
+    margin-top: 0.3rem;
+  }
+
+  /* ===================== MUHURTHAM ===================== */
+  .muhurtham-banner {
+    background: linear-gradient(135deg, var(--crimson), var(--crimson-dark));
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    text-align: center;
+    margin-top: 2rem;
+    box-shadow: 0 10px 40px rgba(198,40,40,0.3);
+  }
+
+  .muhurtham-time {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.5rem;
+    color: var(--gold-light);
+  }
+
+  .muhurtham-detail {
+    font-size: 1rem;
+    color: rgba(255,248,231,0.8);
+    margin-top: 0.5rem;
+  }
+
+  /* ===================== 3D RING SECTION ===================== */
+  #ring-section {
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+
+  #ring-canvas {
+    width: 100%;
+    height: 350px;
+    cursor: grab;
+  }
+
+  #ring-canvas:active { cursor: grabbing; }
+
+  .interaction-hint {
+    font-size: 0.85rem;
+    color: rgba(255,248,231,0.5);
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+
+  /* ===================== FOOTER ===================== */
+  footer {
+    text-align: center;
+    padding: 3rem 1.5rem 2rem;
+    border-top: 1px solid rgba(212,168,67,0.15);
+  }
+
+  .footer-blessing {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .footer-text {
+    font-size: 0.9rem;
+    color: rgba(255,248,231,0.5);
+  }
+
+  /* ===================== FLOATING PETALS ===================== */
+  .petal {
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient(ellipse, var(--rose), transparent);
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100;
+    animation: petalFall linear infinite;
+  }
+
+  /* ===================== ANIMATIONS ===================== */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.15); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.1); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+  }
+
+  @keyframes petalFall {
+    0% { opacity: 0; transform: translateY(-20px) rotate(0deg); }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.5; }
+    100% { opacity: 0; transform: translateY(100vh) rotate(360deg); }
+  }
+
+  /* ===================== SCROLL REVEAL ===================== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Background pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(212,168,67,0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(198,40,40,0.05) 0%, transparent 50%),
+      radial-gradient(circle at 50% 80%, rgba(212,168,67,0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  section, footer, .countdown-section { position: relative; z-index: 1; }
+</style>
+</head>
+<body>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <canvas id="three-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="om-symbol">ॐ</div>
+    <div class="sri-text">Sri Ramajayam</div>
+    <h1 class="couple-names">
+      Ekessh
+      <span class="amp">&</span>
+      Keertanaa
+    </h1>
+    <div class="wedding-date-hero">29 · May · 2026</div>
+  </div>
+  <div class="scroll-indicator" onclick="document.getElementById('invitation').scrollIntoView({behavior:'smooth'})">
+    <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+  </div>
+</section>
+
+<!-- ===================== INVITATION ===================== -->
+<section id="invitation">
+  <div class="reveal">
+    <div class="divider">
+      <span class="divider-line"></span>
+      <span>✦</span>
+      <span class="divider-line"></span>
+    </div>
+    <div class="invitation-card">
+      <div class="parents-text">
+        <span class="parents-name">Smt. T.P.S. Purnima</span> <small>D.E.C.E.</small><br>
+        &<br>
+        <span class="parents-name">Sri. T.K. Sarathi</span> <small>B.Com.</small>
+      </div>
+      <div class="invite-message">
+        We solicit your gracious presence with family and friends<br>
+        on the occasion of the marriage of our son
+      </div>
+
+      <div class="groom-bride-section">
+        <div class="person-title">Chiranjeevi</div>
+        <div class="person-name">T.K.S. Ekessh</div>
+        <div class="person-details">B.Tech., M.B.A. — AI Engineer, NxtGen Analytics (Waterloo, Canada)</div>
+      </div>
+
+      <div class="heart-divider">❤</div>
+
+      <div class="groom-bride-section">
+        <div class="person-title">Sowbhagyavathi</div>
+        <div class="person-name">N.K. Keertanaa</div>
+        <div class="person-details">B.P.T. — D/o Sri. M. Karthik Babu & Smt. Julie</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VENUE & DATE ===================== -->
+<section id="details">
+  <div class="reveal">
+    <h2 class="section-title">Celebration Details</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-icon">📅</div>
+        <div class="info-label">The Date</div>
+        <div class="info-value">
+          <strong>Friday, 29th May 2026</strong><br>
+          Mithunam Lagnam
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🕕</div>
+        <div class="info-label">Muhurtham</div>
+        <div class="info-value">
+          <strong>6:00 AM — 7:25 AM</strong><br>
+          Auspicious Hour
+        </div>
+      </div>
+      <div class="info-card" style="grid-column: 1 / -1;">
+        <div class="info-icon">🏛️</div>
+        <div class="info-label">The Venue</div>
+        <div class="info-value">
+          <strong>Agarwal Bhavan Kalyana Mandapam</strong><br>
+          Old Kuyavar Palayam Road, Madurai-9
+        </div>
+      </div>
+    </div>
+    <div class="muhurtham-banner">
+      <div class="muhurtham-time">🔔 Muhurtham: 6:00 AM to 7:25 AM</div>
+      <div class="muhurtham-detail">Mithunam Lagnam · Kindly arrive by 5:30 AM</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COUNTDOWN ===================== -->
+<div class="countdown-section">
+  <div class="reveal">
+    <h2 class="section-title">Counting the Days</h2>
+    <div class="countdown-grid">
+      <div class="countdown-item">
+        <div class="countdown-number" id="cd-days">--</div>
+        <div class="countdown-label">Days</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="cd-hours">--</div>
+        <div class="countdown-label">Hours</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="cd-mins">--</div>
+        <div class="countdown-label">Minutes</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="cd-secs">--</div>
+        <div class="countdown-label">Seconds</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== 3D RING ===================== -->
+<section id="ring-section">
+  <div class="reveal">
+    <h2 class="section-title">A Bond Eternal</h2>
+    <canvas id="ring-canvas"></canvas>
+    <p class="interaction-hint">✦ Drag to rotate the rings ✦</p>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="reveal">
+    <div class="divider">
+      <span class="divider-line"></span>
+      <span>✦</span>
+      <span class="divider-line"></span>
+    </div>
+    <div class="footer-blessing">With Best Compliments from Friends & Relatives</div>
+    <p class="footer-text">Sri Ramajayam · Ekessh & Keertanaa · 29 May 2026</p>
+  </div>
+</footer>
+
+<script>
+// ===================== HERO 3D SCENE (Mandap) =====================
+(function() {
+  const canvas = document.getElementById('three-canvas');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Lighting
+  const ambientLight = new THREE.AmbientLight(0xD4A843, 0.4);
+  scene.add(ambientLight);
+  const pointLight1 = new THREE.PointLight(0xFFD700, 1.2, 100);
+  pointLight1.position.set(5, 8, 5);
+  scene.add(pointLight1);
+  const pointLight2 = new THREE.PointLight(0xC62828, 0.6, 100);
+  pointLight2.position.set(-5, 3, -5);
+  scene.add(pointLight2);
+
+  // Mandap structure
+  const mandap = new THREE.Group();
+  const goldMat = new THREE.MeshPhongMaterial({ color: 0xD4A843, shininess: 100, specular: 0xFFFFAA });
+  const crimsonMat = new THREE.MeshPhongMaterial({ color: 0xC62828, shininess: 60 });
+
+  // Platform
+  const platform = new THREE.Mesh(new THREE.CylinderGeometry(3, 3.3, 0.3, 8), goldMat);
+  platform.position.y = -2;
+  mandap.add(platform);
+
+  // 4 Pillars
+  for (let i = 0; i < 4; i++) {
+    const angle = (i / 4) * Math.PI * 2 + Math.PI / 4;
+    const pillar = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.15, 4, 8), goldMat);
+    pillar.position.set(Math.cos(angle) * 2, 0, Math.sin(angle) * 2);
+    mandap.add(pillar);
+
+    // Pillar top ornament
+    const ornament = new THREE.Mesh(new THREE.SphereGeometry(0.2, 8, 8), crimsonMat);
+    ornament.position.set(Math.cos(angle) * 2, 2.1, Math.sin(angle) * 2);
+    mandap.add(ornament);
+
+    // Pillar base ornament
+    const base = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.3, 0.15, 8), goldMat);
+    base.position.set(Math.cos(angle) * 2, -1.85, Math.sin(angle) * 2);
+    mandap.add(base);
+  }
+
+  // Dome (top)
+  const dome = new THREE.Mesh(new THREE.SphereGeometry(2.2, 16, 10, 0, Math.PI * 2, 0, Math.PI / 2.5), crimsonMat);
+  dome.position.y = 2;
+  mandap.add(dome);
+
+  // Dome finial
+  const finial = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.15, 0.8, 8), goldMat);
+  finial.position.y = 3.4;
+  mandap.add(finial);
+
+  const finialTop = new THREE.Mesh(new THREE.SphereGeometry(0.12, 8, 8), goldMat);
+  finialTop.position.y = 3.85;
+  mandap.add(finialTop);
+
+  // Draped fabric rings
+  for (let j = 0; j < 3; j++) {
+    const ring = new THREE.Mesh(
+      new THREE.TorusGeometry(2.5 - j * 0.3, 0.04, 8, 32),
+      j % 2 === 0 ? goldMat : crimsonMat
+    );
+    ring.position.y = 1.5 + j * 0.3;
+    ring.rotation.x = Math.PI / 2;
+    mandap.add(ring);
+  }
+
+  mandap.position.y = 0.5;
+  scene.add(mandap);
+
+  // Particles
+  const particleCount = 200;
+  const particleGeometry = new THREE.BufferGeometry();
+  const particlePositions = new Float32Array(particleCount * 3);
+  for (let i = 0; i < particleCount; i++) {
+    particlePositions[i * 3] = (Math.random() - 0.5) * 20;
+    particlePositions[i * 3 + 1] = (Math.random() - 0.5) * 15;
+    particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 20;
+  }
+  particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+  const particleMat = new THREE.PointsMaterial({ color: 0xFFD700, size: 0.05, transparent: true, opacity: 0.6 });
+  const particles = new THREE.Points(particleGeometry, particleMat);
+  scene.add(particles);
+
+  camera.position.set(0, 2, 8);
+  camera.lookAt(0, 0.5, 0);
+
+  function animateHero() {
+    requestAnimationFrame(animateHero);
+    mandap.rotation.y += 0.003;
+    particles.rotation.y -= 0.001;
+
+    const positions = particleGeometry.attributes.position.array;
+    for (let i = 0; i < particleCount; i++) {
+      positions[i * 3 + 1] += 0.005;
+      if (positions[i * 3 + 1] > 8) positions[i * 3 + 1] = -8;
+    }
+    particleGeometry.attributes.position.needsUpdate = true;
+
+    renderer.render(scene, camera);
+  }
+  animateHero();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+})();
+
+// ===================== RING 3D SCENE =====================
+(function() {
+  const canvas = document.getElementById('ring-canvas');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.5);
+  scene.add(ambientLight);
+  const pointLight = new THREE.PointLight(0xFFD700, 1.5, 50);
+  pointLight.position.set(3, 5, 3);
+  scene.add(pointLight);
+  const pointLight2 = new THREE.PointLight(0xFFAA00, 0.8, 50);
+  pointLight2.position.set(-3, 2, -2);
+  scene.add(pointLight2);
+
+  const ringGroup = new THREE.Group();
+  const ringMat = new THREE.MeshPhongMaterial({
+    color: 0xD4A843,
+    shininess: 200,
+    specular: 0xFFFFDD,
+    emissive: 0x332200,
+    emissiveIntensity: 0.1
+  });
+
+  // Ring 1
+  const ring1 = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.15, 16, 64), ringMat);
+  ring1.rotation.x = Math.PI / 6;
+  ring1.rotation.z = -Math.PI / 8;
+  ringGroup.add(ring1);
+
+  // Ring 2
+  const ring2 = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.15, 16, 64), ringMat.clone());
+  ring2.material.color.setHex(0xF0D68A);
+  ring2.rotation.x = -Math.PI / 6;
+  ring2.rotation.z = Math.PI / 8;
+  ringGroup.add(ring2);
+
+  // Diamond on ring1
+  const diamondGeo = new THREE.OctahedronGeometry(0.18, 0);
+  const diamondMat = new THREE.MeshPhongMaterial({ color: 0xFFFFFF, shininess: 300, specular: 0xFFFFFF, transparent: true, opacity: 0.9 });
+  const diamond = new THREE.Mesh(diamondGeo, diamondMat);
+  diamond.position.set(0, 1.2, 0.3);
+  diamond.scale.set(1, 1.3, 1);
+  ringGroup.add(diamond);
+
+  // Small sparkle particles around rings
+  const sparkleCount = 60;
+  const sparkleGeo = new THREE.BufferGeometry();
+  const sparklePos = new Float32Array(sparkleCount * 3);
+  for (let i = 0; i < sparkleCount; i++) {
+    const theta = Math.random() * Math.PI * 2;
+    const r = 1.2 + (Math.random() - 0.5) * 0.8;
+    sparklePos[i * 3] = Math.cos(theta) * r;
+    sparklePos[i * 3 + 1] = (Math.random() - 0.5) * 1.5;
+    sparklePos[i * 3 + 2] = Math.sin(theta) * r;
+  }
+  sparkleGeo.setAttribute('position', new THREE.BufferAttribute(sparklePos, 3));
+  const sparkleMat = new THREE.PointsMaterial({ color: 0xFFD700, size: 0.04, transparent: true, opacity: 0.8 });
+  const sparkles = new THREE.Points(sparkleGeo, sparkleMat);
+  ringGroup.add(sparkles);
+
+  scene.add(ringGroup);
+  camera.position.set(0, 1, 4.5);
+  camera.lookAt(0, 0, 0);
+
+  // Mouse drag rotation
+  let isDragging = false;
+  let prevX = 0, prevY = 0;
+  let rotVelX = 0, rotVelY = 0.005;
+
+  canvas.addEventListener('mousedown', (e) => { isDragging = true; prevX = e.clientX; prevY = e.clientY; });
+  canvas.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - prevX;
+    const dy = e.clientY - prevY;
+    rotVelY = dx * 0.005;
+    rotVelX = dy * 0.005;
+    prevX = e.clientX;
+    prevY = e.clientY;
+  });
+  canvas.addEventListener('mouseup', () => isDragging = false);
+  canvas.addEventListener('mouseleave', () => isDragging = false);
+
+  // Touch support
+  canvas.addEventListener('touchstart', (e) => { isDragging = true; prevX = e.touches[0].clientX; prevY = e.touches[0].clientY; });
+  canvas.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    const dx = e.touches[0].clientX - prevX;
+    const dy = e.touches[0].clientY - prevY;
+    rotVelY = dx * 0.005;
+    rotVelX = dy * 0.005;
+    prevX = e.touches[0].clientX;
+    prevY = e.touches[0].clientY;
+  });
+  canvas.addEventListener('touchend', () => isDragging = false);
+
+  function animateRing() {
+    requestAnimationFrame(animateRing);
+    if (!isDragging) {
+      rotVelX *= 0.95;
+      rotVelY += (0.005 - rotVelY) * 0.01;
+    }
+    ringGroup.rotation.y += rotVelY;
+    ringGroup.rotation.x += rotVelX;
+
+    diamond.rotation.y += 0.02;
+    sparkles.rotation.y -= 0.003;
+    sparkleMat.opacity = 0.5 + Math.sin(Date.now() * 0.003) * 0.3;
+
+    renderer.render(scene, camera);
+  }
+  animateRing();
+
+  const ro = new ResizeObserver(() => {
+    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+  });
+  ro.observe(canvas.parentElement);
+})();
+
+// ===================== COUNTDOWN =====================
+function updateCountdown() {
+  const weddingDate = new Date('2026-05-29T06:00:00+05:30');
+  const now = new Date();
+  const diff = weddingDate - now;
+
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent = '🎉';
+    document.getElementById('cd-hours').textContent = '🎉';
+    document.getElementById('cd-mins').textContent = '🎉';
+    document.getElementById('cd-secs').textContent = '🎉';
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById('cd-days').textContent = days;
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+  document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// ===================== SCROLL REVEAL =====================
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===================== FLOATING PETALS =====================
+function createPetal() {
+  const petal = document.createElement('div');
+  petal.className = 'petal';
+  const size = 8 + Math.random() * 12;
+  petal.style.width = size + 'px';
+  petal.style.height = size + 'px';
+  petal.style.left = Math.random() * 100 + 'vw';
+  petal.style.animationDuration = (6 + Math.random() * 8) + 's';
+  petal.style.animationDelay = Math.random() * 2 + 's';
+
+  const colors = ['var(--rose)', 'var(--gold)', 'var(--saffron)', '#FF8A80'];
+  petal.style.background = `radial-gradient(ellipse, ${colors[Math.floor(Math.random() * colors.length)]}, transparent)`;
+
+  document.body.appendChild(petal);
+  setTimeout(() => petal.remove(), 16000);
+}
+
+setInterval(createPetal, 800);
+for (let i = 0; i < 5; i++) setTimeout(createPetal, i * 300);
+</script>
+
+</body>
+</html>
