@@ -8,35 +8,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
-  :root {
-    --gold: #D4A843;
-    --gold-light: #F0D68A;
-    --gold-dark: #A07830;
-    --crimson: #C62828;
-    --crimson-dark: #8E0000;
-    --cream: #FFF8E7;
-    --deep-maroon: #3D0000;
-    --saffron: #FF6F00;
-    --rose: #E91E63;
+  :root{
+    --gold:#D4A843;
+    --gold-light:#F0D68A;
+    --gold-dark:#A07830;
+    --crimson:#C62828;
+    --crimson-dark:#8E0000;
+    --cream:#FFF8E7;
+    --deep-maroon:#3D0000;
+    --saffron:#FF6F00;
+    --rose:#E91E63;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
 
-  body {
-    background: #0a0a1a;
-    color: var(--cream);
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    overflow-x: hidden;
+  body{
+    background:#0a0a1a;
+    color:var(--cream);
+    font-family:'Cormorant Garamond', Georgia, serif;
+    overflow-x:hidden;
   }
 
-  /* ===================== SKY + CLOUDS BACKGROUND ===================== */
-  .sky-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    background: linear-gradient(180deg,
+  /* ===================== SKY + CLOUDS ===================== */
+  .sky-bg{
+    position:fixed; inset:0;
+    z-index:0;
+    background:linear-gradient(180deg,
       #0b0d2e 0%,
       #141852 10%,
       #1a2370 20%,
@@ -52,706 +50,845 @@
     );
   }
 
-  .sky-stars {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 40%;
-    z-index: 0;
-    pointer-events: none;
+  .sky-stars{
+    position:fixed; top:0; left:0;
+    width:100%; height:40%;
+    z-index:0;
+    pointer-events:none;
   }
 
-  .sky-star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    animation: starTwinkle 4s ease-in-out infinite;
+  .sky-star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    animation:starTwinkle 4s ease-in-out infinite;
   }
 
-  @keyframes starTwinkle {
-    0%, 100% { opacity: 0.15; }
-    50% { opacity: 0.9; }
+  @keyframes starTwinkle{
+    0%,100%{opacity:0.15;}
+    50%{opacity:0.9;}
   }
 
-  .cloud {
-    position: fixed;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.08);
-    filter: blur(30px);
-    z-index: 0;
-    animation: cloudDrift linear infinite;
-    pointer-events: none;
+  .cloud{
+    position:fixed;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    filter:blur(30px);
+    z-index:0;
+    animation:cloudDrift linear infinite;
+    pointer-events:none;
+  }
+  .cloud-1{width:400px;height:120px;top:20%;left:-200px;animation-duration:80s;background:rgba(255,255,255,0.06);}
+  .cloud-2{width:500px;height:150px;top:35%;left:-300px;animation-duration:100s;animation-delay:-30s;background:rgba(255,255,255,0.05);}
+  .cloud-3{width:350px;height:100px;top:15%;left:-200px;animation-duration:70s;animation-delay:-50s;background:rgba(255,255,255,0.07);}
+  .cloud-4{width:450px;height:130px;top:45%;left:-250px;animation-duration:90s;animation-delay:-15s;background:rgba(255,255,255,0.04);}
+  .cloud-5{width:300px;height:90px;top:28%;left:-200px;animation-duration:65s;animation-delay:-40s;background:rgba(255,255,255,0.06);}
+
+  @keyframes cloudDrift{
+    from{transform:translateX(0);}
+    to{transform:translateX(calc(100vw + 600px));}
   }
 
-  .cloud-1 { width: 400px; height: 120px; top: 20%; left: -200px; animation-duration: 80s; background: rgba(255,255,255,0.06); }
-  .cloud-2 { width: 500px; height: 150px; top: 35%; left: -300px; animation-duration: 100s; animation-delay: -30s; background: rgba(255,255,255,0.05); }
-  .cloud-3 { width: 350px; height: 100px; top: 15%; left: -200px; animation-duration: 70s; animation-delay: -50s; background: rgba(255,255,255,0.07); }
-  .cloud-4 { width: 450px; height: 130px; top: 45%; left: -250px; animation-duration: 90s; animation-delay: -15s; background: rgba(255,255,255,0.04); }
-  .cloud-5 { width: 300px; height: 90px; top: 28%; left: -200px; animation-duration: 65s; animation-delay: -40s; background: rgba(255,255,255,0.06); }
-
-  @keyframes cloudDrift {
-    from { transform: translateX(0); }
-    to { transform: translateX(calc(100vw + 600px)); }
-  }
-
-  .sky-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: radial-gradient(ellipse at 50% 30%, rgba(10,10,26,0.2) 0%, rgba(10,10,26,0.6) 100%);
-    z-index: 0;
-    pointer-events: none;
+  .sky-overlay{
+    position:fixed; inset:0;
+    background:radial-gradient(ellipse at 50% 30%, rgba(10,10,26,0.2) 0%, rgba(10,10,26,0.6) 100%);
+    z-index:0;
+    pointer-events:none;
   }
 
   /* ===================== HERO ===================== */
-  #hero {
-    position: relative;
-    height: 100vh;
-    z-index: 1;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
+  #hero{
+    position:relative;
+    height:100vh;
+    z-index:1;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
   }
 
-  /* Subtle temple silhouette background */
-  #hero::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    opacity: 0.18;
-    background-repeat: no-repeat;
-    background-position: left 10% bottom -20px;
-    background-size: min(900px, 80vw);
-    filter: blur(0.2px);
-    pointer-events: none;
-
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 700'%3E%3Cpath fill='%23D4A843' fill-opacity='0.55' d='M120 640h960v30H120z'/%3E%3Cpath fill='%23D4A843' fill-opacity='0.28' d='M220 640V500h50v-60h50v-60h50v-70h60v-60h60v-70h80v-60h60v-50h60v-40h30v40h60v50h60v60h80v70h60v60h60v70h50v60h50v60h50v140H220z'/%3E%3Cpath fill='%23D4A843' fill-opacity='0.22' d='M510 250h180v390H510z'/%3E%3Cpath fill='%23D4A843' fill-opacity='0.20' d='M560 300h80v340h-80z'/%3E%3C/svg%3E");
+  #hero::before{
+    content:"";
+    position:absolute; inset:0;
+    z-index:0;
+    opacity:0.18;
+    background-repeat:no-repeat;
+    background-position:left 10% bottom -20px;
+    background-size:min(900px, 80vw);
+    pointer-events:none;
+    background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 700'%3E%3Cpath fill='%23D4A843' fill-opacity='0.55' d='M120 640h960v30H120z'/%3E%3Cpath fill='%23D4A843' fill-opacity='0.28' d='M220 640V500h50v-60h50v-60h50v-70h60v-60h60v-70h80v-60h60v-50h60v-40h30v40h60v50h60v60h80v70h60v60h60v70h50v60h50v60h50v140H220z'/%3E%3Cpath fill='%23D4A843' fill-opacity='0.22' d='M510 250h180v390H510z'/%3E%3Cpath fill='%23D4A843' fill-opacity='0.20' d='M560 300h80v340h-80z'/%3E%3C/svg%3E");
   }
 
-  .hero-layout {
-    position: relative;
-    z-index: 2;
-    width: min(1100px, 92vw);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 2rem;
-    align-items: center;
-    overflow: visible;
+  .hero-layout{
+    position:relative;
+    z-index:2;
+    width:min(1100px, 92vw);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:2rem;
+    align-items:center;
+    overflow:visible;
   }
 
-  #temple-canvas {
-    width: 100%;
-    height: 100%;
-    display: block;
+  .hero-content{position:relative; z-index:2; text-align:left;}
+
+  .hero-tower{
+    position:relative;
+    justify-self:end;
+    width:min(620px, 54vw);
+    height:min(560px, 74vh);
+    border-radius:28px 0 0 28px;
+    overflow:hidden;
+    background:radial-gradient(ellipse at 50% 40%, rgba(212,168,67,0.10), transparent 65%);
+    box-shadow:0 25px 80px rgba(0,0,0,0.48);
+    border:1px solid rgba(212,168,67,0.18);
+    transform:translateX(calc((100vw - 100%) / 2));
   }
 
-  .hero-gradient {
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 100%; height: 40%;
-    background: linear-gradient(to top, rgba(10,10,26,0.85), transparent);
-    z-index: 1;
-    pointer-events: none;
+  .hero-tower::after{
+    content:"";
+    position:absolute; inset:0;
+    pointer-events:none;
+    background:radial-gradient(ellipse at 20% 50%, rgba(240,214,138,0.18), transparent 55%);
+    mix-blend-mode:screen;
+    opacity:0.55;
   }
 
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: left;
+  #temple-canvas{width:100%;height:100%;display:block;}
+
+  .hero-gradient{
+    position:absolute;
+    bottom:0; left:0;
+    width:100%; height:40%;
+    background:linear-gradient(to top, rgba(10,10,26,0.85), transparent);
+    z-index:1;
+    pointer-events:none;
   }
 
-  /* Tower anchored to the right edge, dramatic but responsive */
-  .hero-tower {
-    position: relative;
-    justify-self: end;
-    width: min(620px, 54vw);
-    height: min(560px, 74vh);
-    border-radius: 28px 0 0 28px;
-    overflow: hidden;
-    background: radial-gradient(ellipse at 50% 40%, rgba(212,168,67,0.10), transparent 65%);
-    box-shadow: 0 25px 80px rgba(0,0,0,0.48);
-    border: 1px solid rgba(212,168,67,0.18);
-
-    /* This pushes the tower from the centered layout to the true screen edge */
-    transform: translateX(calc((100vw - 100%) / 2));
+  .om-symbol{
+    font-size:2.8rem;
+    color:var(--gold);
+    text-shadow:0 0 40px rgba(212,168,67,0.5);
+    opacity:0;
+    animation:heroFadeIn 1.5s ease-out 0.3s forwards;
   }
 
-  /* Extra glow edge to make it feel "anchored" */
-  .hero-tower::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(ellipse at 20% 50%, rgba(240,214,138,0.18), transparent 55%);
-    mix-blend-mode: screen;
-    opacity: 0.55;
+  .sri-text{
+    font-family:'Cinzel Decorative', serif;
+    font-size:0.85rem;
+    letter-spacing:0.6em;
+    color:var(--gold-light);
+    text-transform:uppercase;
+    margin:0.5rem 0 1.2rem;
+    opacity:0;
+    animation:heroFadeIn 1.5s ease-out 0.6s forwards;
   }
 
-  .hero-content .om-symbol {
-    font-size: 2.8rem;
-    color: var(--gold);
-    text-shadow: 0 0 40px rgba(212,168,67,0.5);
-    opacity: 0;
-    animation: heroFadeIn 1.5s ease-out 0.3s forwards;
+  .couple-names{
+    font-family:'Great Vibes', cursive;
+    font-size:clamp(3rem, 8vw, 7rem);
+    color:var(--gold-light);
+    text-shadow:0 0 80px rgba(212,168,67,0.4), 0 4px 30px rgba(0,0,0,0.5);
+    line-height:1.15;
+    opacity:0;
+    animation:heroNameReveal 2s ease-out 1s forwards;
   }
 
-  .hero-content .sri-text {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.6em;
-    color: var(--gold-light);
-    text-transform: uppercase;
-    margin: 0.5rem 0 1.2rem;
-    opacity: 0;
-    animation: heroFadeIn 1.5s ease-out 0.6s forwards;
+  .couple-names .amp{
+    display:block;
+    font-size:0.45em;
+    color:var(--gold);
+    margin:-0.15em 0;
   }
 
-  .couple-names {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(3rem, 8vw, 7rem);
-    color: var(--gold-light);
-    text-shadow: 0 0 80px rgba(212,168,67,0.4), 0 4px 30px rgba(0,0,0,0.5);
-    line-height: 1.15;
-    opacity: 0;
-    animation: heroNameReveal 2s ease-out 1s forwards;
+  .wedding-date-hero{
+    font-family:'Cinzel Decorative', serif;
+    font-size:clamp(0.9rem, 2.2vw, 1.4rem);
+    letter-spacing:0.35em;
+    color:var(--cream);
+    margin-top:1.2rem;
+    opacity:0;
+    animation:heroFadeIn 1.5s ease-out 1.8s forwards;
   }
 
-  .couple-names .amp {
-    display: block;
-    font-size: 0.45em;
-    color: var(--gold);
-    margin: -0.15em 0;
+  .hero-location{
+    font-size:0.9rem;
+    color:rgba(255,248,231,0.6);
+    margin-top:0.4rem;
+    letter-spacing:0.2em;
+    opacity:0;
+    animation:heroFadeIn 1.5s ease-out 2.2s forwards;
   }
 
-  .wedding-date-hero {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(0.9rem, 2.2vw, 1.4rem);
-    letter-spacing: 0.35em;
-    color: var(--cream);
-    margin-top: 1.2rem;
-    opacity: 0;
-    animation: heroFadeIn 1.5s ease-out 1.8s forwards;
+  @keyframes heroFadeIn{
+    from{opacity:0;transform:translateY(20px);}
+    to{opacity:1;transform:translateY(0);}
   }
 
-  .hero-location {
-    font-size: 0.9rem;
-    color: rgba(255,248,231,0.6);
-    margin-top: 0.4rem;
-    letter-spacing: 0.2em;
-    opacity: 0;
-    animation: heroFadeIn 1.5s ease-out 2.2s forwards;
+  @keyframes heroNameReveal{
+    0%{opacity:0;transform:scale(0.8) translateY(30px);letter-spacing:0.1em;}
+    60%{opacity:1;transform:scale(1.02) translateY(-5px);}
+    100%{opacity:1;transform:scale(1) translateY(0);letter-spacing:normal;}
   }
 
-  @keyframes heroFadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  .scroll-indicator{
+    position:absolute;
+    bottom:2rem;
+    z-index:2;
+    cursor:pointer;
+    opacity:0;
+    animation:bounce 2.5s ease-in-out infinite, heroFadeIn 1s ease-out 3s forwards;
+  }
+  .scroll-indicator svg{width:28px;height:28px;fill:var(--gold);opacity:0.5;}
+
+  @keyframes bounce{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(12px);}
   }
 
-  @keyframes heroNameReveal {
-    0% { opacity: 0; transform: scale(0.8) translateY(30px); letter-spacing: 0.1em; }
-    60% { opacity: 1; transform: scale(1.02) translateY(-5px); }
-    100% { opacity: 1; transform: scale(1) translateY(0); letter-spacing: normal; }
-  }
-
-  .scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    z-index: 2;
-    cursor: pointer;
-    opacity: 0;
-    animation: bounce 2.5s ease-in-out infinite, heroFadeIn 1s ease-out 3s forwards;
-  }
-
-  .scroll-indicator svg { width: 28px; height: 28px; fill: var(--gold); opacity: 0.5; }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(12px); }
-  }
-
-  @media (max-width: 800px) {
-    #hero { height: auto; padding: 5.5rem 0 3.5rem; }
-    .hero-layout { grid-template-columns: 1fr; }
-    .hero-content { text-align: center; }
-    .hero-tower {
-      width: 100%;
-      height: 360px;
-      border-radius: 22px;
-      transform: none;
-      margin-top: 1.5rem;
+  @media (max-width:800px){
+    #hero{height:auto;padding:5.5rem 0 3.5rem;}
+    .hero-layout{grid-template-columns:1fr;}
+    .hero-content{text-align:center;}
+    .hero-tower{
+      width:100%;
+      height:360px;
+      border-radius:22px;
+      transform:none;
+      margin-top:1.5rem;
     }
-    #hero::before { background-position: center bottom -20px; opacity: 0.14; }
+    #hero::before{background-position:center bottom -20px;opacity:0.14;}
   }
 
-  /* ===================== GOLDEN PARTICLE BURST ON SCROLL ===================== */
-  .particle-burst {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 1000;
-  }
-
-  .burst-particle {
-    position: absolute;
-    width: 4px; height: 4px;
-    background: var(--gold);
-    border-radius: 50%;
-    opacity: 0;
-    box-shadow: 0 0 6px var(--gold-light);
-  }
-
-  /* ===================== DIVIDER ===================== */
-  .divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    padding: 2rem 0;
-    color: var(--gold);
-    font-size: 1.5rem;
-  }
-
-  .divider-line {
-    width: 80px; height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  /* ===================== PARTICLE BURST ===================== */
+  .particle-burst{position:fixed;inset:0;pointer-events:none;z-index:1000;}
+  .burst-particle{
+    position:absolute;
+    width:4px;height:4px;
+    background:var(--gold);
+    border-radius:50%;
+    opacity:0;
+    box-shadow:0 0 6px var(--gold-light);
   }
 
   /* ===================== SECTIONS ===================== */
-  section {
-    position: relative;
-    padding: 5rem 1.5rem;
-    max-width: 900px;
-    margin: 0 auto;
-    z-index: 1;
+  section{
+    position:relative;
+    padding:5rem 1.5rem;
+    max-width:900px;
+    margin:0 auto;
+    z-index:1;
   }
 
-  .section-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    color: var(--gold);
-    text-align: center;
-    margin-bottom: 2rem;
-    text-shadow: 0 0 40px rgba(212,168,67,0.3);
+  .section-title{
+    font-family:'Cinzel Decorative', serif;
+    font-size:clamp(1.8rem, 4vw, 2.8rem);
+    color:var(--gold);
+    text-align:center;
+    margin-bottom:2rem;
+    text-shadow:0 0 40px rgba(212,168,67,0.3);
+  }
+
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:1rem;
+    padding:2rem 0;
+    color:var(--gold);
+    font-size:1.5rem;
+  }
+  .divider-line{
+    width:80px;height:1px;
+    background:linear-gradient(to right, transparent, var(--gold), transparent);
   }
 
   /* ===================== SCROLL ANIMATIONS ===================== */
-  .scroll-reveal {
-    opacity: 0;
-    transform: translateY(50px) scale(0.95);
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  .scroll-reveal{
+    opacity:0;
+    transform:translateY(50px) scale(0.95);
+    transition:all 1s cubic-bezier(0.16,1,0.3,1);
   }
-  .scroll-reveal.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  .scroll-reveal.visible{opacity:1;transform:translateY(0) scale(1);}
 
-  .scroll-slide-left {
-    opacity: 0;
-    transform: translateX(-80px);
-    transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  .scroll-slide-left{
+    opacity:0;
+    transform:translateX(-80px);
+    transition:all 0.9s cubic-bezier(0.16,1,0.3,1);
   }
-  .scroll-slide-left.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  .scroll-slide-left.visible{opacity:1;transform:translateX(0);}
 
-  .scroll-slide-right {
-    opacity: 0;
-    transform: translateX(80px);
-    transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  .scroll-slide-right{
+    opacity:0;
+    transform:translateX(80px);
+    transition:all 0.9s cubic-bezier(0.16,1,0.3,1);
   }
-  .scroll-slide-right.visible {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  .scroll-slide-right.visible{opacity:1;transform:translateX(0);}
 
-  .scroll-zoom {
-    opacity: 0;
-    transform: scale(0.6);
-    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  .scroll-zoom{
+    opacity:0;
+    transform:scale(0.6);
+    transition:all 1.2s cubic-bezier(0.16,1,0.3,1);
   }
-  .scroll-zoom.visible {
-    opacity: 1;
-    transform: scale(1);
-  }
+  .scroll-zoom.visible{opacity:1;transform:scale(1);}
 
-  .scroll-rotate {
-    opacity: 0;
-    transform: rotate(-5deg) translateY(40px);
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  .scroll-rotate{
+    opacity:0;
+    transform:rotate(-5deg) translateY(40px);
+    transition:all 1s cubic-bezier(0.16,1,0.3,1);
   }
-  .scroll-rotate.visible {
-    opacity: 1;
-    transform: rotate(0deg) translateY(0);
-  }
+  .scroll-rotate.visible{opacity:1;transform:rotate(0deg) translateY(0);}
 
-  .stagger-children > * {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  .stagger-children > *{
+    opacity:0;
+    transform:translateY(30px);
+    transition:all 0.7s cubic-bezier(0.16,1,0.3,1);
   }
-  .stagger-children.visible > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: none; }
-  .stagger-children.visible > *:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: none; }
-  .stagger-children.visible > *:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: none; }
-  .stagger-children.visible > *:nth-child(4) { transition-delay: 0.45s; opacity: 1; transform: none; }
-  .stagger-children.visible > *:nth-child(5) { transition-delay: 0.6s; opacity: 1; transform: none; }
-  .stagger-children.visible > *:nth-child(6) { transition-delay: 0.75s; opacity: 1; transform: none; }
-  .stagger-children.visible > *:nth-child(7) { transition-delay: 0.9s; opacity: 1; transform: none; }
-  .stagger-children.visible > *:nth-child(8) { transition-delay: 1.05s; opacity: 1; transform: none; }
+  .stagger-children.visible > *:nth-child(1){transition-delay:0s;opacity:1;transform:none;}
+  .stagger-children.visible > *:nth-child(2){transition-delay:0.15s;opacity:1;transform:none;}
+  .stagger-children.visible > *:nth-child(3){transition-delay:0.3s;opacity:1;transform:none;}
+  .stagger-children.visible > *:nth-child(4){transition-delay:0.45s;opacity:1;transform:none;}
+  .stagger-children.visible > *:nth-child(5){transition-delay:0.6s;opacity:1;transform:none;}
+  .stagger-children.visible > *:nth-child(6){transition-delay:0.75s;opacity:1;transform:none;}
+  .stagger-children.visible > *:nth-child(7){transition-delay:0.9s;opacity:1;transform:none;}
+  .stagger-children.visible > *:nth-child(8){transition-delay:1.05s;opacity:1;transform:none;}
 
-  .glow-border-reveal {
-    position: relative;
+  .glow-border-reveal{position:relative;}
+  .glow-border-reveal::after{
+    content:'';
+    position:absolute;
+    top:-2px;left:-2px;right:-2px;bottom:-2px;
+    border-radius:22px;
+    background:conic-gradient(from 0deg, var(--gold), transparent, var(--gold), transparent, var(--gold));
+    z-index:-1;
+    opacity:0;
+    transition:opacity 1.5s ease;
+    animation:borderRotate 4s linear infinite paused;
   }
-  .glow-border-reveal::after {
-    content: '';
-    position: absolute;
-    top: -2px; left: -2px; right: -2px; bottom: -2px;
-    border-radius: 22px;
-    background: conic-gradient(from 0deg, var(--gold), transparent, var(--gold), transparent, var(--gold));
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 1.5s ease;
-    animation: borderRotate 4s linear infinite paused;
-  }
-  .glow-border-reveal.visible::after {
-    opacity: 0.4;
-    animation-play-state: running;
-  }
+  .glow-border-reveal.visible::after{opacity:0.4;animation-play-state:running;}
 
-  @keyframes borderRotate {
-    from { filter: hue-rotate(0deg); }
-    to { filter: hue-rotate(360deg); }
+  @keyframes borderRotate{
+    from{filter:hue-rotate(0deg);}
+    to{filter:hue-rotate(360deg);}
   }
 
   /* ===================== INVITATION CARD ===================== */
-  .invitation-card {
-    background: linear-gradient(135deg, rgba(61,0,0,0.88), rgba(100,20,20,0.75));
-    border: 1px solid rgba(212,168,67,0.3);
-    border-radius: 20px;
-    padding: 3rem 2rem;
-    text-align: center;
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    box-shadow: 0 25px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(212,168,67,0.2);
-    overflow: hidden;
+  .invitation-card{
+    background:linear-gradient(135deg, rgba(61,0,0,0.88), rgba(100,20,20,0.75));
+    border:1px solid rgba(212,168,67,0.3);
+    border-radius:20px;
+    padding:3rem 2rem;
+    text-align:center;
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+    box-shadow:0 25px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(212,168,67,0.2);
+    overflow:hidden;
   }
 
-  .parents-text {
-    font-size: 1.1rem;
-    line-height: 2;
-    color: rgba(255,248,231,0.85);
-    margin-bottom: 1.5rem;
+  .parents-text{
+    font-size:1.1rem;
+    line-height:2;
+    color:rgba(255,248,231,0.85);
+    margin-bottom:1.5rem;
   }
 
-  .parents-name {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 1.2rem;
-    color: var(--gold-light);
+  .parents-name{
+    font-family:'Cinzel Decorative', serif;
+    font-size:1.2rem;
+    color:var(--gold-light);
   }
 
-  .invite-message {
-    font-style: italic;
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: rgba(255,248,231,0.9);
-    margin: 1.5rem 0 2rem;
+  .invite-message{
+    font-style:italic;
+    font-size:1.2rem;
+    line-height:1.8;
+    color:rgba(255,248,231,0.9);
+    margin:1.5rem 0 2rem;
   }
 
-  .groom-bride-section { margin: 2rem 0; }
+  .groom-bride-section{margin:2rem 0;}
 
-  .person-title {
-    font-style: italic;
-    font-size: 1rem;
-    color: var(--gold);
-    margin-bottom: 0.3rem;
+  .person-title{
+    font-style:italic;
+    font-size:1rem;
+    color:var(--gold);
+    margin-bottom:0.3rem;
   }
 
-  .person-name {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
-    color: var(--gold-light);
-    text-shadow: 0 0 30px rgba(212,168,67,0.3);
+  .person-name{
+    font-family:'Great Vibes', cursive;
+    font-size:clamp(2.2rem, 5vw, 3.5rem);
+    color:var(--gold-light);
+    text-shadow:0 0 30px rgba(212,168,67,0.3);
   }
 
-  .person-details {
-    font-size: 0.95rem;
-    color: rgba(255,248,231,0.7);
-    margin-top: 0.3rem;
+  .person-details{
+    font-size:0.95rem;
+    color:rgba(255,248,231,0.7);
+    margin-top:0.3rem;
   }
 
-  .heart-divider {
-    font-size: 2rem;
-    color: var(--rose);
-    margin: 1.5rem 0;
-    animation: heartbeat 1.5s ease-in-out infinite;
+  .heart-divider{
+    font-size:2rem;
+    color:var(--rose);
+    margin:1.5rem 0;
+    animation:heartbeat 1.5s ease-in-out infinite;
   }
 
-  @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    15% { transform: scale(1.2); }
-    30% { transform: scale(1); }
-    45% { transform: scale(1.15); }
+  @keyframes heartbeat{
+    0%,100%{transform:scale(1);}
+    15%{transform:scale(1.2);}
+    30%{transform:scale(1);}
+    45%{transform:scale(1.15);}
   }
 
   /* ===================== INFO GRID ===================== */
-  .info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
+  .info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+    margin-top:2rem;
+  }
+  @media (max-width:600px){.info-grid{grid-template-columns:1fr;}}
+
+  .info-card{
+    background:linear-gradient(145deg, rgba(100,20,20,0.6), rgba(61,0,0,0.85));
+    border:1px solid rgba(212,168,67,0.2);
+    border-radius:16px;
+    padding:2rem;
+    text-align:center;
+    transition:transform 0.5s cubic-bezier(0.16,1,0.3,1), box-shadow 0.5s ease;
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+  }
+  .info-card:hover{
+    transform:translateY(-8px) scale(1.02);
+    box-shadow:0 20px 50px rgba(212,168,67,0.15);
   }
 
-  @media (max-width: 600px) { .info-grid { grid-template-columns: 1fr; } }
-
-  .info-card {
-    background: linear-gradient(145deg, rgba(100,20,20,0.6), rgba(61,0,0,0.85));
-    border: 1px solid rgba(212,168,67,0.2);
-    border-radius: 16px;
-    padding: 2rem;
-    text-align: center;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+  .info-label{
+    font-family:'Cinzel Decorative', serif;
+    font-size:1rem;
+    color:var(--gold);
+    letter-spacing:0.15em;
+    margin-bottom:0.8rem;
   }
 
-  .info-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 50px rgba(212,168,67,0.15);
+  .info-value{
+    font-size:1.15rem;
+    line-height:1.65;
+    color:var(--cream);
+  }
+  .info-value strong{color:var(--gold-light);}
+
+  /* Venue links styling */
+  .venue-links{
+    display:flex;
+    flex-direction:column;
+    gap:0.85rem;
+    margin-top:0.6rem;
   }
 
-  .info-label {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 1rem;
-    color: var(--gold);
-    letter-spacing: 0.15em;
-    margin-bottom: 0.8rem;
+  .venue-link{
+    display:flex;
+    align-items:flex-start;
+    gap:0.8rem;
+    text-decoration:none;
+    padding:0.85rem 1rem;
+    border-radius:14px;
+    border:1px solid rgba(212,168,67,0.22);
+    background:rgba(0,0,0,0.18);
+    transition:transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
 
-  .info-value {
-    font-size: 1.15rem;
-    line-height: 1.6;
-    color: var(--cream);
-  }
-  .info-value strong { color: var(--gold-light); }
-
-  .calendar-icon {
-    width: 64px; height: 68px;
-    margin: 0 auto 1rem;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  }
-  .cal-header {
-    background: var(--crimson);
-    height: 22px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 0.55rem; font-weight: 700;
-    color: white; letter-spacing: 0.15em;
-  }
-  .cal-body {
-    background: #fff;
-    height: 46px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 1.8rem; font-weight: 900;
-    color: #1a1a1a;
+  .venue-link:hover{
+    transform:translateY(-2px);
+    box-shadow:0 16px 40px rgba(212,168,67,0.12);
+    border-color:rgba(240,214,138,0.45);
   }
 
-  .clock-icon {
-    width: 56px; height: 56px;
-    margin: 0 auto 1rem;
-    border: 3px solid var(--gold);
-    border-radius: 50%;
-    position: relative;
-    background: rgba(61,0,0,0.5);
-  }
-  .clock-center { position: absolute; top: 50%; left: 50%; width: 5px; height: 5px; background: var(--gold); border-radius: 50%; transform: translate(-50%, -50%); }
-  .clock-hand-hour { position: absolute; top: 50%; left: 50%; width: 2px; height: 14px; background: var(--gold-light); transform-origin: bottom center; transform: translate(-50%, -100%) rotate(-150deg); border-radius: 1px; }
-  .clock-hand-min { position: absolute; top: 50%; left: 50%; width: 1.5px; height: 19px; background: var(--gold); transform-origin: bottom center; transform: translate(-50%, -100%) rotate(0deg); border-radius: 1px; }
-
-  .venue-icon-wrapper { width: 56px; height: 56px; margin: 0 auto 1rem; }
-  .venue-gopuram { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
-  .venue-gopuram .vg-finial { width: 4px; height: 8px; background: var(--gold); border-radius: 50% 50% 0 0; }
-  .venue-gopuram .vg-tier1 { width: 16px; height: 6px; background: linear-gradient(90deg, var(--rose), var(--saffron), #4caf50); border: 1px solid var(--gold-dark); }
-  .venue-gopuram .vg-tier2 { width: 22px; height: 7px; background: linear-gradient(90deg, #9c27b0, #2196f3, #ff9800); border: 1px solid var(--gold-dark); }
-  .venue-gopuram .vg-tier3 { width: 28px; height: 7px; background: linear-gradient(90deg, #e91e63, #4caf50, #ffeb3b); border: 1px solid var(--gold-dark); }
-  .venue-gopuram .vg-base { width: 32px; height: 20px; background: linear-gradient(180deg, #795548, #5d4037); border: 1px solid var(--gold-dark); position: relative; }
-  .venue-gopuram .vg-base::before { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 10px; height: 12px; background: #1a0a0a; border-radius: 10px 10px 0 0; }
-
-  /* ===================== MUHURTHAM BANNER ===================== */
-  .muhurtham-banner {
-    background: linear-gradient(135deg, var(--crimson), var(--crimson-dark));
-    border: 2px solid var(--gold);
-    border-radius: 12px;
-    padding: 1.5rem 2rem;
-    text-align: center;
-    margin-top: 2rem;
-    box-shadow: 0 10px 40px rgba(198,40,40,0.3);
-  }
-  .muhurtham-time { font-family: 'Cinzel Decorative', serif; font-size: 1.5rem; color: var(--gold-light); }
-  .muhurtham-detail { font-size: 1rem; color: rgba(255,248,231,0.8); margin-top: 0.5rem; }
-
-  /* ===================== ACTION BUTTONS ===================== */
-  .action-buttons {
-    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.5rem;
+  .venue-badge{
+    min-width:34px;
+    height:34px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1rem;
+    background:linear-gradient(135deg, rgba(198,40,40,0.85), rgba(142,0,0,0.85));
+    border:1px solid rgba(212,168,67,0.28);
+    color:var(--cream);
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
+    margin-top:2px;
   }
 
-  .action-btn {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    padding: 0.9rem 1.8rem;
-    border-radius: 50px;
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 0.85rem;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-    position: relative; overflow: hidden;
+  .venue-text{
+    text-align:left;
+    flex:1;
   }
-  .action-btn::before {
-    content: '';
-    position: absolute; top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-    transition: left 0.5s ease;
+  .venue-title{
+    font-family:'Cinzel Decorative', serif;
+    font-size:0.95rem;
+    letter-spacing:0.12em;
+    color:rgba(255,248,231,0.85);
+    text-transform:uppercase;
   }
-  .action-btn:hover::before { left: 100%; }
+  .venue-name{
+    font-size:1.12rem;
+    color:var(--gold-light);
+    margin-top:0.2rem;
+  }
+  .venue-hint{
+    font-size:0.95rem;
+    color:rgba(255,248,231,0.65);
+    margin-top:0.15rem;
+  }
 
-  .btn-calendar {
-    background: linear-gradient(135deg, var(--crimson), var(--crimson-dark));
-    color: var(--cream);
-    border: 1px solid rgba(212,168,67,0.4);
-    box-shadow: 0 4px 20px rgba(198,40,40,0.3);
+  .calendar-icon{
+    width:64px;height:68px;
+    margin:0 auto 1rem;
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 4px 15px rgba(0,0,0,0.4);
   }
-  .btn-calendar:hover { transform: translateY(-3px); box-shadow: 0 10px 35px rgba(198,40,40,0.5); }
-
-  .btn-maps {
-    background: linear-gradient(135deg, var(--gold-dark), #85681f);
-    color: var(--cream);
-    border: 1px solid rgba(240,214,138,0.4);
-    box-shadow: 0 4px 20px rgba(212,168,67,0.3);
+  .cal-header{
+    background:var(--crimson);
+    height:22px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cinzel Decorative', serif;
+    font-size:0.55rem;font-weight:700;
+    color:white;letter-spacing:0.15em;
   }
-  .btn-maps:hover { transform: translateY(-3px); box-shadow: 0 10px 35px rgba(212,168,67,0.5); }
+  .cal-body{
+    background:#fff;
+    height:46px;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Cinzel Decorative', serif;
+    font-size:1.8rem;font-weight:900;
+    color:#1a1a1a;
+  }
 
-  .btn-icon { font-size: 1.1rem; }
+  .clock-icon{
+    width:56px;height:56px;
+    margin:0 auto 1rem;
+    border:3px solid var(--gold);
+    border-radius:50%;
+    position:relative;
+    background:rgba(61,0,0,0.5);
+  }
+  .clock-center{position:absolute;top:50%;left:50%;width:5px;height:5px;background:var(--gold);border-radius:50%;transform:translate(-50%,-50%);}
+  .clock-hand-hour{position:absolute;top:50%;left:50%;width:2px;height:14px;background:var(--gold-light);transform-origin:bottom center;transform:translate(-50%,-100%) rotate(-150deg);border-radius:1px;}
+  .clock-hand-min{position:absolute;top:50%;left:50%;width:1.5px;height:19px;background:var(--gold);transform-origin:bottom center;transform:translate(-50%,-100%) rotate(0deg);border-radius:1px;}
+
+  .muhurtham-banner{
+    background:linear-gradient(135deg, var(--crimson), var(--crimson-dark));
+    border:2px solid var(--gold);
+    border-radius:12px;
+    padding:1.5rem 2rem;
+    text-align:center;
+    margin-top:2rem;
+    box-shadow:0 10px 40px rgba(198,40,40,0.3);
+  }
+  .muhurtham-time{font-family:'Cinzel Decorative', serif;font-size:1.5rem;color:var(--gold-light);}
+  .muhurtham-detail{font-size:1rem;color:rgba(255,248,231,0.8);margin-top:0.5rem;}
+
+  /* ===================== ACTION BUTTONS + DROPDOWN ===================== */
+  .action-buttons{
+    display:flex;
+    gap:1rem;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:2.5rem;
+  }
+
+  .action-btn{
+    display:inline-flex;align-items:center;gap:0.6rem;
+    padding:0.9rem 1.8rem;
+    border-radius:50px;
+    font-family:'Cinzel Decorative', serif;
+    font-size:0.85rem;
+    letter-spacing:0.1em;
+    text-decoration:none;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    border:none;
+    position:relative;
+    overflow:hidden;
+    user-select:none;
+  }
+
+  .action-btn::before{
+    content:'';
+    position:absolute;top:0;left:-100%;
+    width:100%;height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition:left 0.5s ease;
+  }
+  .action-btn:hover::before{left:100%;}
+
+  .btn-calendar{
+    background:linear-gradient(135deg, var(--crimson), var(--crimson-dark));
+    color:var(--cream);
+    border:1px solid rgba(212,168,67,0.4);
+    box-shadow:0 4px 20px rgba(198,40,40,0.3);
+  }
+  .btn-calendar:hover{transform:translateY(-3px);box-shadow:0 10px 35px rgba(198,40,40,0.5);}
+
+  .calendar-dropdown{
+    display:inline-flex;
+    align-items:center;
+    gap:0.7rem;
+    padding:0.6rem 0.8rem 0.6rem 1rem;
+    border-radius:50px;
+    background:rgba(255,248,231,0.08);
+    border:1px solid rgba(212,168,67,0.25);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+  }
+
+  .calendar-dropdown label{
+    font-family:'Cinzel Decorative', serif;
+    font-size:0.75rem;
+    letter-spacing:0.12em;
+    color:rgba(255,248,231,0.85);
+    white-space:nowrap;
+  }
+
+  .calendar-dropdown select{
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    background:rgba(0,0,0,0.25);
+    color:var(--cream);
+    border:1px solid rgba(212,168,67,0.35);
+    border-radius:999px;
+    padding:0.6rem 2.2rem 0.6rem 0.9rem;
+    font-family:'Cormorant Garamond', Georgia, serif;
+    font-size:1rem;
+    outline:none;
+    cursor:pointer;
+  }
+
+  .calendar-dropdown .chev{
+    position:relative;
+    margin-left:-2.2rem;
+    pointer-events:none;
+    color:rgba(255,248,231,0.75);
+    font-size:0.9rem;
+  }
+
+  /* ===================== TIMELINE ===================== */
+  .timeline-wrap{margin-top:2.5rem;}
+
+  .timeline-intro{
+    text-align:center;
+    max-width:780px;
+    margin:0 auto 2.2rem;
+    color:rgba(255,248,231,0.75);
+    font-size:1.15rem;
+    line-height:1.7;
+  }
+
+  .timeline{
+    position:relative;
+    margin:0 auto;
+    padding-left:1.2rem;
+    max-width:860px;
+  }
+
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:14px; top:0; bottom:0;
+    width:2px;
+    background:linear-gradient(to bottom, rgba(212,168,67,0.0), rgba(212,168,67,0.6), rgba(212,168,67,0.0));
+  }
+
+  .t-item{
+    position:relative;
+    padding:1.2rem 1.2rem 1.2rem 2.3rem;
+    margin:0 0 1.2rem 0;
+    border-radius:18px;
+    background:linear-gradient(145deg, rgba(100,20,20,0.55), rgba(61,0,0,0.88));
+    border:1px solid rgba(212,168,67,0.2);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow:0 18px 55px rgba(0,0,0,0.35);
+    overflow:hidden;
+  }
+
+  .t-item::before{
+    content:"";
+    position:absolute;
+    left:6px;
+    top:1.55rem;
+    width:18px;height:18px;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, var(--gold-light), var(--gold));
+    box-shadow:0 0 20px rgba(212,168,67,0.45);
+  }
+
+  .t-head{
+    display:flex;
+    gap:0.9rem;
+    flex-wrap:wrap;
+    align-items:baseline;
+    margin-bottom:0.6rem;
+  }
+
+  .t-date{
+    font-family:'Cinzel Decorative', serif;
+    font-size:0.95rem;
+    letter-spacing:0.18em;
+    color:rgba(255,248,231,0.85);
+    text-transform:uppercase;
+  }
+
+  .t-time{
+    font-family:'Cinzel Decorative', serif;
+    font-size:0.85rem;
+    letter-spacing:0.14em;
+    color:rgba(240,214,138,0.95);
+    text-transform:uppercase;
+  }
+
+  .t-title{
+    font-family:'Cinzel Decorative', serif;
+    font-size:1.25rem;
+    color:var(--gold-light);
+    text-shadow:0 0 25px rgba(212,168,67,0.22);
+  }
+
+  .t-body{
+    color:rgba(255,248,231,0.78);
+    font-size:1.05rem;
+    line-height:1.75;
+  }
+
+  .event-venues{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0.9rem;
+    margin-top:0.9rem;
+  }
+
+  @media (max-width:640px){
+    .event-venues{grid-template-columns:1fr;}
+  }
+
+  .mini-venue{
+    text-decoration:none;
+    border-radius:16px;
+    padding:0.95rem 1rem;
+    border:1px solid rgba(212,168,67,0.22);
+    background:rgba(0,0,0,0.18);
+    transition:transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display:flex;
+    gap:0.75rem;
+    align-items:flex-start;
+  }
+
+  .mini-venue:hover{
+    transform:translateY(-2px);
+    box-shadow:0 16px 40px rgba(212,168,67,0.12);
+    border-color:rgba(240,214,138,0.45);
+  }
+
+  .mini-dot{
+    width:12px;height:12px;
+    border-radius:50%;
+    margin-top:0.35rem;
+    background:linear-gradient(135deg, var(--gold-light), var(--gold));
+    box-shadow:0 0 16px rgba(212,168,67,0.25);
+  }
+
+  .mini-venue strong{
+    color:var(--gold-light);
+    font-weight:600;
+  }
+
+  .mini-venue .small{
+    display:block;
+    margin-top:0.25rem;
+    color:rgba(255,248,231,0.65);
+  }
 
   /* ===================== COUNTDOWN ===================== */
-  .countdown-section {
-    text-align: center; padding: 5rem 1.5rem; position: relative; z-index: 1;
+  .countdown-section{text-align:center;padding:5rem 1.5rem;position:relative;z-index:1;}
+  .countdown-grid{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-top:2rem;}
+  .countdown-item{
+    background:linear-gradient(145deg, rgba(100,20,20,0.6), rgba(61,0,0,0.9));
+    border:1px solid rgba(212,168,67,0.25);
+    border-radius:16px;
+    padding:1.5rem 2rem;
+    min-width:100px;
+    transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    backdrop-filter:blur(10px);
   }
-  .countdown-grid {
-    display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem;
+  .countdown-item:hover{transform:scale(1.08);}
+  .countdown-number{
+    font-family:'Cinzel Decorative', serif;
+    font-size:2.5rem;
+    color:var(--gold);
+    text-shadow:0 0 20px rgba(212,168,67,0.4);
   }
-  .countdown-item {
-    background: linear-gradient(145deg, rgba(100,20,20,0.6), rgba(61,0,0,0.9));
-    border: 1px solid rgba(212,168,67,0.25);
-    border-radius: 16px;
-    padding: 1.5rem 2rem; min-width: 100px;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    backdrop-filter: blur(10px);
-  }
-  .countdown-item:hover { transform: scale(1.08); }
-
-  .countdown-number {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 2.5rem; color: var(--gold);
-    text-shadow: 0 0 20px rgba(212,168,67,0.4);
-  }
-  .countdown-label {
-    font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(255,248,231,0.6); margin-top: 0.3rem;
-  }
-
-  /* ===================== PARALLAX QUOTE ===================== */
-  .parallax-quote {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 6rem 2rem;
-    overflow: hidden;
-  }
-
-  .parallax-quote-inner {
-    position: relative;
-    z-index: 2;
-  }
-
-  .quote-text {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    color: var(--gold-light);
-    line-height: 1.5;
-    max-width: 700px;
-    margin: 0 auto;
-    text-shadow: 0 0 40px rgba(212,168,67,0.3);
-  }
-
-  .quote-source {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 0.85rem;
-    color: var(--gold);
-    letter-spacing: 0.3em;
-    margin-top: 1.5rem;
-    opacity: 0.7;
-  }
-
-  .parallax-glow {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(212,168,67,0.1) 0%, transparent 70%);
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    pointer-events: none;
+  .countdown-label{
+    font-size:0.85rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:rgba(255,248,231,0.6);
+    margin-top:0.3rem;
   }
 
   /* ===================== FOOTER ===================== */
-  footer {
-    text-align: center; padding: 3rem 1.5rem 2rem;
-    border-top: 1px solid rgba(212,168,67,0.15);
-    position: relative; z-index: 1;
+  footer{
+    text-align:center;
+    padding:3rem 1.5rem 2rem;
+    border-top:1px solid rgba(212,168,67,0.15);
+    position:relative;
+    z-index:1;
   }
-  .footer-blessing { font-family: 'Great Vibes', cursive; font-size: 2rem; color: var(--gold); margin-bottom: 1rem; }
-  .footer-text { font-size: 0.9rem; color: rgba(255,248,231,0.5); }
+  .footer-blessing{
+    font-family:'Great Vibes', cursive;
+    font-size:2rem;
+    color:var(--gold);
+    margin-bottom:1rem;
+  }
+  .footer-text{font-size:0.9rem;color:rgba(255,248,231,0.5);}
 
   /* ===================== FLOATING PETALS ===================== */
-  .petal {
-    position: fixed;
-    border-radius: 50% 0 50% 0;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 100;
-    animation: petalFall linear infinite;
+  .petal{
+    position:fixed;
+    border-radius:50% 0 50% 0;
+    opacity:0;
+    pointer-events:none;
+    z-index:100;
+    animation:petalFall linear infinite;
   }
 
-  @keyframes petalFall {
-    0% { opacity: 0; transform: translateY(-20px) rotate(0deg) translateX(0); }
-    10% { opacity: 0.6; }
-    50% { transform: translateY(50vh) rotate(180deg) translateX(30px); }
-    90% { opacity: 0.4; }
-    100% { opacity: 0; transform: translateY(100vh) rotate(360deg) translateX(-20px); }
+  @keyframes petalFall{
+    0%{opacity:0;transform:translateY(-20px) rotate(0deg) translateX(0);}
+    10%{opacity:0.6;}
+    50%{transform:translateY(50vh) rotate(180deg) translateX(30px);}
+    90%{opacity:0.4;}
+    100%{opacity:0;transform:translateY(100vh) rotate(360deg) translateX(-20px);}
   }
 
-  /* ===================== SCROLL PROGRESS BAR ===================== */
-  .scroll-progress {
-    position: fixed;
-    top: 0; left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--rose), var(--gold));
-    z-index: 9999;
-    transition: width 0.1s linear;
-    box-shadow: 0 0 10px var(--gold);
+  /* ===================== SCROLL PROGRESS ===================== */
+  .scroll-progress{
+    position:fixed;
+    top:0; left:0;
+    height:3px;
+    background:linear-gradient(90deg, var(--gold), var(--rose), var(--gold));
+    z-index:9999;
+    transition:width 0.1s linear;
+    box-shadow:0 0 10px var(--gold);
   }
 </style>
 </head>
 
 <body>
-
-<div class="scroll-progress" id="scrollProgress" style="width: 0%;"></div>
+<div class="scroll-progress" id="scrollProgress" style="width:0%;"></div>
 <div class="particle-burst" id="particleBurst"></div>
 
 <div class="sky-bg"></div>
@@ -763,7 +900,6 @@
 <div class="cloud cloud-5"></div>
 <div class="sky-overlay"></div>
 
-<!-- ===================== HERO ===================== -->
 <section id="hero">
   <div class="hero-layout">
     <div class="hero-content">
@@ -790,16 +926,6 @@
   </div>
 </section>
 
-<!-- ===================== PARALLAX QUOTE ===================== -->
-<div class="parallax-quote">
-  <div class="parallax-glow"></div>
-  <div class="parallax-quote-inner scroll-zoom">
-    <div class="quote-text">"Different journeys, same destiny. Two hearts learning to beat as one."</div>
-    <div class="quote-source">A SACRED UNION</div>
-  </div>
-</div>
-
-<!-- ===================== INVITATION ===================== -->
 <section id="invitation">
   <div class="scroll-reveal">
     <div class="divider">
@@ -807,7 +933,7 @@
     </div>
   </div>
 
-  <div class="invitation-card glow-border-reveal scroll-reveal" style="transition-delay: 0.2s;">
+  <div class="invitation-card glow-border-reveal scroll-reveal" style="transition-delay:0.2s;">
     <div class="stagger-children" id="inviteStagger">
       <div class="parents-text">
         <span class="parents-name">Smt. T.P.S. Purnima</span> <small>D.E.C.E.</small><br>
@@ -826,7 +952,7 @@
         <div class="person-details">B.Tech., M.B.A. · AI Engineer, NxtGen Analytics (Waterloo, Canada)</div>
       </div>
 
-      <div class="heart-divider">❤ Weds ❤</div>
+      <div class="heart-divider">&hearts; Weds &hearts;</div>
 
       <div class="groom-bride-section">
         <div class="person-title">Sowbhagyavathi</div>
@@ -837,11 +963,11 @@
   </div>
 </section>
 
-<!-- ===================== DETAILS ===================== -->
 <section id="details">
   <h2 class="section-title scroll-reveal">Celebration Details</h2>
 
   <div class="info-grid stagger-children">
+
     <div class="info-card scroll-slide-left">
       <div class="calendar-icon">
         <div class="cal-header">MAY</div>
@@ -858,40 +984,133 @@
         <div class="clock-center"></div>
       </div>
       <div class="info-label">Muhurtham</div>
-      <div class="info-value"><strong>6:00 AM to 7:25 AM</strong><br>Auspicious Hour</div>
+      <div class="info-value"><strong>6:00 AM to 7:25 AM</strong><br>Kindly arrive by 5:30 AM</div>
     </div>
 
-    <div class="info-card scroll-zoom" style="grid-column: 1 / -1;">
-      <div class="venue-icon-wrapper">
-        <div class="venue-gopuram">
-          <div class="vg-finial"></div>
-          <div class="vg-tier1"></div>
-          <div class="vg-tier2"></div>
-          <div class="vg-tier3"></div>
-          <div class="vg-base"></div>
-        </div>
+    <div class="info-card scroll-zoom" style="grid-column:1 / -1;">
+      <div class="info-label">Wedding Venues</div>
+
+      <div class="venue-links">
+        <a class="venue-link" href="https://maps.app.goo.gl/FQKFRbEKMEjorat6A" target="_blank" rel="noopener">
+          <div class="venue-badge">G</div>
+          <div class="venue-text">
+            <div class="venue-title">Groom Mandapam</div>
+            <div class="venue-name">Agarwal Bhavan</div>
+            <div class="venue-hint">Tap to open in Google Maps</div>
+          </div>
+        </a>
+
+        <a class="venue-link" href="https://maps.app.goo.gl/nCtcwhEfbF7FTLUS7" target="_blank" rel="noopener">
+          <div class="venue-badge">B</div>
+          <div class="venue-text">
+            <div class="venue-title">Bride Mandapam</div>
+            <div class="venue-name">Aaru Nadu Arangam</div>
+            <div class="venue-hint">Tap to open in Google Maps</div>
+          </div>
+        </a>
       </div>
-      <div class="info-label">The Venue</div>
-      <div class="info-value"><strong>Agarwal Bhavan Kalyana Mandapam</strong><br>Old Kuyavar Palayam Road, Madurai-9</div>
     </div>
+
   </div>
 
   <div class="muhurtham-banner scroll-rotate">
-    <div class="muhurtham-time">🔔 Muhurtham: 6:00 AM to 7:25 AM</div>
-    <div class="muhurtham-detail">Mithunam Lagnam · Kindly arrive by 5:30 AM</div>
+    <div class="muhurtham-time">Muhurtham: 6:00 AM to 7:25 AM</div>
+    <div class="muhurtham-detail">Mithunam Lagnam</div>
   </div>
 
-  <div class="action-buttons scroll-reveal" style="transition-delay: 0.4s;">
-    <a class="action-btn btn-calendar" href="#" onclick="downloadCalendarInvite(event)">
-      <span class="btn-icon">📅</span> Save the Date
-    </a>
-    <a class="action-btn btn-maps" href="https://share.google/fYlrqLXZa7qdJUlwZ" target="_blank" rel="noopener">
-      <span class="btn-icon">📍</span> Open in Google Maps
-    </a>
+  <div class="action-buttons scroll-reveal" style="transition-delay:0.4s;">
+    <div class="calendar-dropdown" role="group" aria-label="Calendar options">
+      <label for="calOption">Calendar</label>
+      <select id="calOption">
+        <option value="google">Google Calendar</option>
+        <option value="apple">Apple Calendar</option>
+        <option value="ics">ICS File</option>
+      </select>
+      <span class="chev">▾</span>
+      <button class="action-btn btn-calendar" type="button" onclick="handleCalendarChoice()">Add</button>
+    </div>
   </div>
 </section>
 
-<!-- ===================== COUNTDOWN ===================== -->
+<section id="timeline">
+  <h2 class="section-title scroll-reveal">Ceremony Timeline</h2>
+
+  <div class="timeline-wrap">
+    <p class="timeline-intro scroll-reveal" style="transition-delay:0.15s;">
+      Two sacred spaces, one celebration. Groom relatives will gather at the Groom Mandapam, and Bride relatives will gather at the Bride Mandapam.
+      The rituals flow across both venues, and the union is completed at the Bride Mandapam.
+    </p>
+
+    <div class="timeline">
+
+      <div class="t-item scroll-reveal" style="transition-delay:0.1s;">
+        <div class="t-head">
+          <div class="t-date">May 28, 2026</div>
+          <div class="t-time">6:00 PM</div>
+        </div>
+        <div class="t-title">Reception, Blessings and Shared Rituals</div>
+        <div class="t-body">
+          As evening lamps are lit, the reception begins, and the families begin the first set of auspicious rituals.
+          The ceremonies are shared between both mandapams, like two streams joining the same river.
+          <div class="event-venues">
+            <a class="mini-venue" href="https://maps.app.goo.gl/FQKFRbEKMEjorat6A" target="_blank" rel="noopener">
+              <span class="mini-dot"></span>
+              <span>
+                <strong>Groom Mandapam</strong><br>
+                Agarwal Bhavan
+                <span class="small">Gathering for Groom relatives, and select evening rituals</span>
+              </span>
+            </a>
+            <a class="mini-venue" href="https://maps.app.goo.gl/nCtcwhEfbF7FTLUS7" target="_blank" rel="noopener">
+              <span class="mini-dot"></span>
+              <span>
+                <strong>Bride Mandapam</strong><br>
+                Aaru Nadu Arangam
+                <span class="small">Gathering for Bride relatives, and select evening rituals</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-item scroll-reveal" style="transition-delay:0.2s;">
+        <div class="t-head">
+          <div class="t-date">May 29, 2026</div>
+          <div class="t-time">Early Morning</div>
+        </div>
+        <div class="t-title">Kasi Yatra, The Sacred Journey</div>
+        <div class="t-body">
+          The Groom begins the Kasi Yatra, a symbolic walk of purpose and inner resolve, setting out from the Groom side.
+          The procession moves towards the Bride Mandapam as families gather in devotion and joy.
+        </div>
+      </div>
+
+      <div class="t-item scroll-reveal" style="transition-delay:0.3s;">
+        <div class="t-head">
+          <div class="t-date">May 29, 2026</div>
+          <div class="t-time">6:00 AM to 7:25 AM</div>
+        </div>
+        <div class="t-title">The Promise and the Wedding at the Bride Mandapam</div>
+        <div class="t-body">
+          At the entrance of the Bride Mandapam, the Bride’s father invites the Groom to step into married life with his daughter.
+          The Groom agrees, and the marriage is solemnized at the Bride Mandapam during the Muhurtham.
+          <div class="event-venues" style="margin-top:0.9rem;">
+            <a class="mini-venue" href="https://maps.app.goo.gl/nCtcwhEfbF7FTLUS7" target="_blank" rel="noopener">
+              <span class="mini-dot"></span>
+              <span>
+                <strong>Wedding Venue</strong><br>
+                Aaru Nadu Arangam
+                <span class="small">Tap to open the location in Google Maps</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <div class="countdown-section">
   <h2 class="section-title scroll-reveal">Counting the Days</h2>
   <div class="countdown-grid stagger-children">
@@ -914,194 +1133,154 @@
   </div>
 </div>
 
-<!-- ===================== FOOTER ===================== -->
 <footer>
   <div class="scroll-reveal">
     <div class="divider">
       <span class="divider-line"></span><span>✦</span><span class="divider-line"></span>
     </div>
-    <div class="footer-blessing">With Best Compliments from Friends & Relatives</div>
-    <p class="footer-text">Sri Ramajayam · Ekessh & Keertanaa · 29 May 2026</p>
+    <div class="footer-blessing">With Best Compliments from Friends and Relatives</div>
+    <p class="footer-text">Sri Ramajayam · Ekessh and Keertanaa · 29 May 2026</p>
   </div>
 </footer>
 
 <script>
-/* ===================== GENERATE STARS ===================== */
-(function() {
-  const c = document.getElementById('skyStars');
-  for (let i = 0; i < 100; i++) {
-    const s = document.createElement('div');
-    s.className = 'sky-star';
-    s.style.left = Math.random() * 100 + '%';
-    s.style.top = Math.random() * 100 + '%';
-    s.style.animationDelay = Math.random() * 6 + 's';
-    s.style.animationDuration = (2 + Math.random() * 5) + 's';
-    const sz = 1 + Math.random() * 2;
-    s.style.width = sz + 'px';
-    s.style.height = sz + 'px';
+/* ===================== STARS ===================== */
+(function(){
+  const c=document.getElementById('skyStars');
+  for(let i=0;i<100;i++){
+    const s=document.createElement('div');
+    s.className='sky-star';
+    s.style.left=Math.random()*100+'%';
+    s.style.top=Math.random()*100+'%';
+    s.style.animationDelay=Math.random()*6+'s';
+    s.style.animationDuration=(2+Math.random()*5)+'s';
+    const sz=1+Math.random()*2;
+    s.style.width=sz+'px';
+    s.style.height=sz+'px';
     c.appendChild(s);
   }
 })();
 
-/* ===================== 3D MEENAKSHI TEMPLE TOWER ===================== */
-(function() {
-  const canvas = document.getElementById('temple-canvas');
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+/* ===================== 3D TOWER ===================== */
+(function(){
+  const canvas=document.getElementById('temple-canvas');
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+  const renderer=new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  function resizeTemple() {
-    const w = canvas.clientWidth;
-    const h = canvas.clientHeight;
-    if (!w || !h) return;
+  function resizeTemple(){
+    const w=canvas.clientWidth;
+    const h=canvas.clientHeight;
+    if(!w || !h) return;
     renderer.setSize(w, h, false);
-    camera.aspect = w / h;
+    camera.aspect=w/h;
     camera.updateProjectionMatrix();
   }
 
-  // Lighting
-  const ambient = new THREE.AmbientLight(0xffeedd, 0.5);
-  scene.add(ambient);
+  scene.add(new THREE.AmbientLight(0xffeedd, 0.5));
+  const sun=new THREE.DirectionalLight(0xFFD700, 1.0); sun.position.set(5,10,5); scene.add(sun);
+  const back=new THREE.PointLight(0xe07040, 0.6, 50); back.position.set(-5,2,-5); scene.add(back);
+  const rim=new THREE.PointLight(0x8ba0d4, 0.3, 50); rim.position.set(0,8,-8); scene.add(rim);
 
-  const sun = new THREE.DirectionalLight(0xFFD700, 1.0);
-  sun.position.set(5, 10, 5);
-  scene.add(sun);
+  const tower=new THREE.Group();
+  const tierColors=[0xe91e63,0xff5722,0xffeb3b,0x4caf50,0x2196f3,0x9c27b0,0xf44336,0xff9800,0x8bc34a,0x00bcd4,0x673ab7,0xe91e63,0x009688,0xffc107,0x3f51b5];
 
-  const backLight = new THREE.PointLight(0xe07040, 0.6, 50);
-  backLight.position.set(-5, 2, -5);
-  scene.add(backLight);
+  const baseMat=new THREE.MeshPhongMaterial({color:0x795548, shininess:30});
+  const goldMat=new THREE.MeshPhongMaterial({color:0xD4A843, shininess:120, specular:0xFFFFAA});
 
-  const rimLight = new THREE.PointLight(0x8ba0d4, 0.3, 50);
-  rimLight.position.set(0, 8, -8);
-  scene.add(rimLight);
+  const base=new THREE.Mesh(new THREE.BoxGeometry(3.5,3,2.5), baseMat);
+  base.position.y=1.5; tower.add(base);
 
-  const tower = new THREE.Group();
+  const baseBorder=new THREE.Mesh(new THREE.BoxGeometry(3.7,0.15,2.7), goldMat);
+  baseBorder.position.y=3.05; tower.add(baseBorder);
 
-  const tierColors = [
-    0xe91e63, 0xff5722, 0xffeb3b, 0x4caf50, 0x2196f3, 0x9c27b0,
-    0xf44336, 0xff9800, 0x8bc34a, 0x00bcd4, 0x673ab7, 0xe91e63,
-    0x009688, 0xffc107, 0x3f51b5
-  ];
+  const archMat=new THREE.MeshPhongMaterial({color:0x0a0505});
+  const arch=new THREE.Mesh(new THREE.BoxGeometry(1.2,2,0.3), archMat);
+  arch.position.set(0,1,1.3); tower.add(arch);
 
-  const baseMat = new THREE.MeshPhongMaterial({ color: 0x795548, shininess: 30 });
-  const goldMat = new THREE.MeshPhongMaterial({ color: 0xD4A843, shininess: 120, specular: 0xFFFFAA });
+  const archTop=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,0.3,16,1,false,0,Math.PI), archMat);
+  archTop.rotation.z=Math.PI/2; archTop.rotation.y=Math.PI/2;
+  archTop.position.set(0,2,1.3); tower.add(archTop);
 
-  const base = new THREE.Mesh(new THREE.BoxGeometry(3.5, 3, 2.5), baseMat);
-  base.position.y = 1.5;
-  tower.add(base);
+  const numTiers=12;
+  let currentY=3.15;
 
-  const baseBorder = new THREE.Mesh(new THREE.BoxGeometry(3.7, 0.15, 2.7), goldMat);
-  baseBorder.position.y = 3.05;
-  tower.add(baseBorder);
+  for(let i=0;i<numTiers;i++){
+    const progress=i/numTiers;
+    const width=3.3-progress*2.4;
+    const depth=2.3-progress*1.6;
+    const height=0.55-progress*0.02;
 
-  const archMat = new THREE.MeshPhongMaterial({ color: 0x0a0505 });
-  const arch = new THREE.Mesh(new THREE.BoxGeometry(1.2, 2, 0.3), archMat);
-  arch.position.set(0, 1, 1.3);
-  tower.add(arch);
+    const mat=new THREE.MeshPhongMaterial({color:tierColors[i%tierColors.length], shininess:40});
+    const tier=new THREE.Mesh(new THREE.BoxGeometry(width,height,depth), mat);
+    tier.position.y=currentY+height/2; tower.add(tier);
 
-  const archTop = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 0.3, 16, 1, false, 0, Math.PI), archMat);
-  archTop.rotation.z = Math.PI / 2;
-  archTop.rotation.y = Math.PI / 2;
-  archTop.position.set(0, 2, 1.3);
-  tower.add(archTop);
-
-  const numTiers = 12;
-  let currentY = 3.15;
-
-  for (let i = 0; i < numTiers; i++) {
-    const progress = i / numTiers;
-    const width = 3.3 - progress * 2.4;
-    const depth = 2.3 - progress * 1.6;
-    const height = 0.55 - progress * 0.02;
-
-    const mat = new THREE.MeshPhongMaterial({
-      color: tierColors[i % tierColors.length],
-      shininess: 40
-    });
-
-    const tier = new THREE.Mesh(new THREE.BoxGeometry(width, height, depth), mat);
-    tier.position.y = currentY + height / 2;
-    tower.add(tier);
-
-    if (i < numTiers - 1) {
-      const sep = new THREE.Mesh(
-        new THREE.BoxGeometry(width + 0.08, 0.04, depth + 0.08),
-        goldMat
-      );
-      sep.position.y = currentY + height + 0.02;
-      tower.add(sep);
+    if(i<numTiers-1){
+      const sep=new THREE.Mesh(new THREE.BoxGeometry(width+0.08,0.04,depth+0.08), goldMat);
+      sep.position.y=currentY+height+0.02; tower.add(sep);
     }
 
-    const sculptCount = Math.max(2, Math.floor((numTiers - i) / 2));
-    for (let s = 0; s < sculptCount; s++) {
-      const sculptMat = new THREE.MeshPhongMaterial({
-        color: tierColors[(i + s + 3) % tierColors.length],
-        shininess: 20
-      });
-      const sculpt = new THREE.Mesh(new THREE.SphereGeometry(0.06, 6, 6), sculptMat);
-      const xPos = -width / 2 + 0.2 + (s / (sculptCount - 1 || 1)) * (width - 0.4);
-      sculpt.position.set(xPos, currentY + height / 2, depth / 2 + 0.04);
+    const sculptCount=Math.max(2, Math.floor((numTiers-i)/2));
+    for(let s=0;s<sculptCount;s++){
+      const sculptMat=new THREE.MeshPhongMaterial({color:tierColors[(i+s+3)%tierColors.length], shininess:20});
+      const sculpt=new THREE.Mesh(new THREE.SphereGeometry(0.06,6,6), sculptMat);
+      const xPos=-width/2+0.2+(s/(sculptCount-1||1))*(width-0.4);
+      sculpt.position.set(xPos, currentY+height/2, depth/2+0.04);
       tower.add(sculpt);
 
-      const sculptBack = sculpt.clone();
-      sculptBack.position.z = -depth / 2 - 0.04;
+      const sculptBack=sculpt.clone();
+      sculptBack.position.z=-depth/2-0.04;
       tower.add(sculptBack);
     }
 
-    currentY += height + 0.04;
+    currentY+=height+0.04;
   }
 
-  const domeMat = new THREE.MeshPhongMaterial({ color: 0xD4A843, shininess: 150, specular: 0xFFFFCC });
+  const domeMat=new THREE.MeshPhongMaterial({color:0xD4A843, shininess:150, specular:0xFFFFCC});
+  const barrel=new THREE.Mesh(new THREE.CylinderGeometry(0.2,0.35,0.6,12), domeMat);
+  barrel.position.y=currentY+0.3; tower.add(barrel);
 
-  const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.35, 0.6, 12), domeMat);
-  barrel.position.y = currentY + 0.3;
-  tower.add(barrel);
+  const topSphere=new THREE.Mesh(new THREE.SphereGeometry(0.18,12,12), domeMat);
+  topSphere.position.y=currentY+0.75; tower.add(topSphere);
 
-  const topSphere = new THREE.Mesh(new THREE.SphereGeometry(0.18, 12, 12), domeMat);
-  topSphere.position.y = currentY + 0.75;
-  tower.add(topSphere);
+  const spike=new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.08,0.5,8), domeMat);
+  spike.position.y=currentY+1.15; tower.add(spike);
 
-  const spike = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.08, 0.5, 8), domeMat);
-  spike.position.y = currentY + 1.15;
-  tower.add(spike);
+  const tipSphere=new THREE.Mesh(new THREE.SphereGeometry(0.06,8,8), domeMat);
+  tipSphere.position.y=currentY+1.45; tower.add(tipSphere);
 
-  const tipSphere = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 8), domeMat);
-  tipSphere.position.y = currentY + 1.45;
-  tower.add(tipSphere);
-
-  tower.position.y = -3;
-  tower.scale.set(0.85, 0.85, 0.85);
+  tower.position.y=-3;
+  tower.scale.set(0.85,0.85,0.85);
   scene.add(tower);
 
-  const partCount = 150;
-  const partGeo = new THREE.BufferGeometry();
-  const partPos = new Float32Array(partCount * 3);
+  const partCount=150;
+  const partGeo=new THREE.BufferGeometry();
+  const partPos=new Float32Array(partCount*3);
 
-  for (let i = 0; i < partCount; i++) {
-    partPos[i * 3] = (Math.random() - 0.5) * 15;
-    partPos[i * 3 + 1] = Math.random() * 15 - 3;
-    partPos[i * 3 + 2] = (Math.random() - 0.5) * 15;
+  for(let i=0;i<partCount;i++){
+    partPos[i*3]=(Math.random()-0.5)*15;
+    partPos[i*3+1]=Math.random()*15-3;
+    partPos[i*3+2]=(Math.random()-0.5)*15;
   }
-  partGeo.setAttribute('position', new THREE.BufferAttribute(partPos, 3));
-  const partMat = new THREE.PointsMaterial({ color: 0xFFD700, size: 0.04, transparent: true, opacity: 0.5 });
-  const particles = new THREE.Points(partGeo, partMat);
+  partGeo.setAttribute('position', new THREE.BufferAttribute(partPos,3));
+  const partMat=new THREE.PointsMaterial({color:0xFFD700, size:0.04, transparent:true, opacity:0.5});
+  const particles=new THREE.Points(partGeo, partMat);
   scene.add(particles);
 
-  camera.position.set(0, 3, 12);
-  camera.lookAt(0, 3, 0);
+  camera.position.set(0,3,12);
+  camera.lookAt(0,3,0);
 
-  function animate() {
+  function animate(){
     requestAnimationFrame(animate);
 
-    const pos = partGeo.attributes.position.array;
-    for (let i = 0; i < partCount; i++) {
-      pos[i * 3 + 1] += 0.003;
-      if (pos[i * 3 + 1] > 12) pos[i * 3 + 1] = -3;
+    const pos=partGeo.attributes.position.array;
+    for(let i=0;i<partCount;i++){
+      pos[i*3+1]+=0.003;
+      if(pos[i*3+1]>12) pos[i*3+1]=-3;
     }
-    partGeo.attributes.position.needsUpdate = true;
-    particles.rotation.y += 0.0005;
-
+    partGeo.attributes.position.needsUpdate=true;
+    particles.rotation.y+=0.0005;
     renderer.render(scene, camera);
   }
 
@@ -1112,139 +1291,225 @@
   new ResizeObserver(resizeTemple).observe(canvas.parentElement);
 })();
 
-/* ===================== SCROLL ANIMATIONS ===================== */
-(function() {
-  const allAnimated = document.querySelectorAll(
-    '.scroll-reveal, .scroll-slide-left, .scroll-slide-right, .scroll-zoom, .scroll-rotate, .stagger-children, .glow-border-reveal'
-  );
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
+/* ===================== SCROLL REVEAL ===================== */
+(function(){
+  const allAnimated=document.querySelectorAll('.scroll-reveal, .scroll-slide-left, .scroll-slide-right, .scroll-zoom, .scroll-rotate, .stagger-children, .glow-border-reveal');
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
         entry.target.classList.add('visible');
-
-        if (entry.target.classList.contains('scroll-zoom') || entry.target.classList.contains('glow-border-reveal')) {
+        if(entry.target.classList.contains('scroll-zoom') || entry.target.classList.contains('glow-border-reveal')){
           triggerParticleBurst(entry.target);
         }
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-
-  allAnimated.forEach(el => observer.observe(el));
+  }, {threshold:0.12, rootMargin:'0px 0px -50px 0px'});
+  allAnimated.forEach(el=>observer.observe(el));
 })();
 
-/* ===================== GOLDEN PARTICLE BURST ===================== */
-function triggerParticleBurst(target) {
-  const rect = target.getBoundingClientRect();
-  const cx = rect.left + rect.width / 2;
-  const cy = rect.top + rect.height / 2;
-  const container = document.getElementById('particleBurst');
+/* ===================== PARTICLE BURST ===================== */
+function triggerParticleBurst(target){
+  const rect=target.getBoundingClientRect();
+  const cx=rect.left+rect.width/2;
+  const cy=rect.top+rect.height/2;
+  const container=document.getElementById('particleBurst');
 
-  for (let i = 0; i < 25; i++) {
-    const p = document.createElement('div');
-    p.className = 'burst-particle';
-    p.style.left = cx + 'px';
-    p.style.top = cy + 'px';
+  for(let i=0;i<25;i++){
+    const p=document.createElement('div');
+    p.className='burst-particle';
+    p.style.left=cx+'px';
+    p.style.top=cy+'px';
 
-    const angle = (Math.PI * 2 * i) / 25;
-    const dist = 60 + Math.random() * 120;
-    const dx = Math.cos(angle) * dist;
-    const dy = Math.sin(angle) * dist;
-    const dur = 600 + Math.random() * 400;
+    const angle=(Math.PI*2*i)/25;
+    const dist=60+Math.random()*120;
+    const dx=Math.cos(angle)*dist;
+    const dy=Math.sin(angle)*dist;
+    const dur=600+Math.random()*400;
 
     p.animate([
-      { opacity: 1, transform: 'translate(0, 0) scale(1)' },
-      { opacity: 0, transform: `translate(${dx}px, ${dy}px) scale(0)` }
-    ], { duration: dur, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
+      {opacity:1, transform:'translate(0, 0) scale(1)'},
+      {opacity:0, transform:`translate(${dx}px, ${dy}px) scale(0)`}
+    ], {duration:dur, easing:'cubic-bezier(0.16, 1, 0.3, 1)'});
 
     container.appendChild(p);
-    setTimeout(() => p.remove(), dur);
+    setTimeout(()=>p.remove(), dur);
   }
 }
 
-/* ===================== SCROLL PROGRESS BAR ===================== */
-window.addEventListener('scroll', () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = (scrollTop / docHeight) * 100;
-  document.getElementById('scrollProgress').style.width = progress + '%';
-});
-
-/* ===================== PARALLAX on scroll ===================== */
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const stars = document.getElementById('skyStars');
-  if (stars) stars.style.transform = `translateY(${scrollY * 0.15}px)`;
+/* ===================== SCROLL PROGRESS ===================== */
+window.addEventListener('scroll', ()=>{
+  const scrollTop=window.scrollY;
+  const docHeight=document.documentElement.scrollHeight-window.innerHeight;
+  const progress=(scrollTop/docHeight)*100;
+  document.getElementById('scrollProgress').style.width=progress+'%';
 });
 
 /* ===================== COUNTDOWN ===================== */
-function updateCountdown() {
-  const w = new Date('2026-05-29T06:00:00+05:30');
-  const n = new Date();
-  const d = w - n;
+function updateCountdown(){
+  const w=new Date('2026-05-29T06:00:00+05:30');
+  const n=new Date();
+  const d=w-n;
 
-  if (d <= 0) {
-    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => (document.getElementById(id).textContent = '🎉'));
+  if(d<=0){
+    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>document.getElementById(id).textContent='00');
     return;
   }
 
-  document.getElementById('cd-days').textContent = Math.floor(d / 86400000);
-  document.getElementById('cd-hours').textContent = String(Math.floor((d % 86400000) / 3600000)).padStart(2, '0');
-  document.getElementById('cd-mins').textContent = String(Math.floor((d % 3600000) / 60000)).padStart(2, '0');
-  document.getElementById('cd-secs').textContent = String(Math.floor((d % 60000) / 1000)).padStart(2, '0');
+  document.getElementById('cd-days').textContent=Math.floor(d/86400000);
+  document.getElementById('cd-hours').textContent=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent=String(Math.floor((d%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-secs').textContent=String(Math.floor((d%60000)/1000)).padStart(2,'0');
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-/* ===================== CALENDAR INVITE ===================== */
-function downloadCalendarInvite(e) {
-  e.preventDefault();
-  const ics = [
-    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Ekessh & Keertanaa Wedding//EN',
-    'CALSCALE:GREGORIAN','METHOD:PUBLISH','BEGIN:VEVENT',
-    'DTSTART:20260529T003000Z','DTEND:20260529T020000Z',
-    'SUMMARY:Wedding of Ekessh & Keertanaa',
-    'DESCRIPTION:Marriage ceremony of T.K.S. Ekessh & N.K. Keertanaa.\\nMuhurtham: 6:00 AM to 7:25 AM IST (Mithunam Lagnam).\\nKindly arrive by 5:30 AM.\\n\\nWith blessings from Smt. T.P.S. Purnima & Sri. T.K. Sarathi.',
-    'LOCATION:Agarwal Bhavan Kalyana Mandapam\\, Old Kuyavar Palayam Road\\, Madurai-9\\, Tamil Nadu\\, India',
-    'URL:https://share.google/fYlrqLXZa7qdJUlwZ',
-    'STATUS:CONFIRMED',
-    'BEGIN:VALARM','TRIGGER:-P1D','ACTION:DISPLAY','DESCRIPTION:Wedding of Ekessh & Keertanaa is tomorrow!','END:VALARM',
-    'BEGIN:VALARM','TRIGGER:-PT3H','ACTION:DISPLAY','DESCRIPTION:Wedding starts in 3 hours!','END:VALARM',
-    'END:VEVENT','END:VCALENDAR'
-  ].join('\r\n');
+/* ===================== CALENDAR LINKS ===================== */
+function pad2(n){return String(n).padStart(2,'0');}
+function formatIcsUTC(d){
+  return d.getUTCFullYear()+pad2(d.getUTCMonth()+1)+pad2(d.getUTCDate())+'T'+pad2(d.getUTCHours())+pad2(d.getUTCMinutes())+pad2(d.getUTCSeconds())+'Z';
+}
+function makeUid(prefix){return prefix+'-'+Math.random().toString(16).slice(2)+'@ekessh-keertanaa';}
 
-  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'Ekessh-Keertanaa-Wedding.ics';
+function buildWeddingIcs(){
+  const groomMap='https://maps.app.goo.gl/FQKFRbEKMEjorat6A';
+  const brideMap='https://maps.app.goo.gl/nCtcwhEfbF7FTLUS7';
+
+  const recStart=new Date('2026-05-28T18:00:00+05:30');
+  const recEnd=new Date('2026-05-28T21:00:00+05:30');
+
+  const wedStart=new Date('2026-05-29T06:00:00+05:30');
+  const wedEnd=new Date('2026-05-29T07:25:00+05:30');
+
+  const descriptionCommon=
+    'Wedding celebrations of T.K.S. Ekessh and N.K. Keertanaa.\\n\\n'+
+    'Venues (Google Maps):\\n'+
+    'Groom Mandapam: Agarwal Bhavan '+groomMap+'\\n'+
+    'Bride Mandapam: Aaru Nadu Arangam '+brideMap+'\\n\\n'+
+    'Gathering: Groom relatives at Groom Mandapam, Bride relatives at Bride Mandapam.\\n\\n'+
+    'Reception: May 28, 6:00 PM, shared rituals across both venues.\\n'+
+    'Wedding: May 29, Kasi Yatra begins, then marriage at Bride Mandapam during Muhurtham.';
+
+  const dtstamp=formatIcsUTC(new Date());
+
+  const lines=[
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Ekessh and Keertanaa Wedding//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+
+    'BEGIN:VEVENT',
+    'UID:'+makeUid('reception'),
+    'DTSTAMP:'+dtstamp,
+    'DTSTART:'+formatIcsUTC(recStart),
+    'DTEND:'+formatIcsUTC(recEnd),
+    'SUMMARY:Reception of Ekessh and Keertanaa',
+    'DESCRIPTION:'+descriptionCommon,
+    'LOCATION:Groom Mandapam (Agarwal Bhavan) and Bride Mandapam (Aaru Nadu Arangam)',
+    'URL:'+groomMap,
+    'STATUS:CONFIRMED',
+    'END:VEVENT',
+
+    'BEGIN:VEVENT',
+    'UID:'+makeUid('wedding'),
+    'DTSTAMP:'+dtstamp,
+    'DTSTART:'+formatIcsUTC(wedStart),
+    'DTEND:'+formatIcsUTC(wedEnd),
+    'SUMMARY:Wedding of Ekessh and Keertanaa',
+    'DESCRIPTION:'+descriptionCommon,
+    'LOCATION:Aaru Nadu Arangam (Bride Mandapam), Madurai, Tamil Nadu, India',
+    'URL:'+brideMap,
+    'STATUS:CONFIRMED',
+
+    'BEGIN:VALARM',
+    'TRIGGER:-P1D',
+    'ACTION:DISPLAY',
+    'DESCRIPTION:Wedding celebrations are tomorrow.',
+    'END:VALARM',
+
+    'BEGIN:VALARM',
+    'TRIGGER:-PT3H',
+    'ACTION:DISPLAY',
+    'DESCRIPTION:Wedding starts in 3 hours.',
+    'END:VALARM',
+
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ];
+  return lines.join('\r\n');
+}
+
+function downloadIcs(filename, icsText){
+  const blob=new Blob([icsText], {type:'text/calendar;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=filename;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
 }
 
-/* ===================== FLOATING PETALS ===================== */
-function createPetal() {
-  const p = document.createElement('div');
-  p.className = 'petal';
-  const sz = 8 + Math.random() * 12;
-  p.style.width = sz + 'px';
-  p.style.height = sz + 'px';
-  p.style.left = Math.random() * 100 + 'vw';
-  p.style.animationDuration = (8 + Math.random() * 10) + 's';
-  p.style.animationDelay = Math.random() * 2 + 's';
-  const colors = [
-    'rgba(233,30,99,0.6)',
-    'rgba(212,168,67,0.5)',
-    'rgba(255,111,0,0.5)',
-    'rgba(255,138,128,0.5)'
-  ];
-  p.style.background = `radial-gradient(ellipse, ${colors[Math.floor(Math.random()*colors.length)]}, transparent)`;
+function buildGoogleCalendarLink(){
+  const groomMap='https://maps.app.goo.gl/FQKFRbEKMEjorat6A';
+  const brideMap='https://maps.app.goo.gl/nCtcwhEfbF7FTLUS7';
+
+  const start='20260529T003000Z'; // 06:00 IST
+  const end='20260529T015500Z';   // 07:25 IST
+
+  const title=encodeURIComponent('Wedding of Ekessh and Keertanaa');
+
+  const details=encodeURIComponent(
+    'Venues (Google Maps):\n'+
+    'Groom Mandapam, Agarwal Bhavan: '+groomMap+'\n'+
+    'Bride Mandapam, Aaru Nadu Arangam: '+brideMap+'\n\n'+
+    'Gathering:\n'+
+    'Groom relatives at Groom Mandapam.\n'+
+    'Bride relatives at Bride Mandapam.\n\n'+
+    'Reception: May 28, 6:00 PM, shared rituals across both venues.\n'+
+    'Wedding: May 29, Kasi Yatra begins, then marriage at Bride Mandapam during Muhurtham.'
+  );
+
+  const location=encodeURIComponent('Aaru Nadu Arangam, Madurai, Tamil Nadu, India (Bride Mandapam)');
+
+  return 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+    '&text=' + title +
+    '&dates=' + start + '/' + end +
+    '&details=' + details +
+    '&location=' + location;
+}
+
+function handleCalendarChoice(){
+  const option=document.getElementById('calOption').value;
+  const ics=buildWeddingIcs();
+
+  if(option==='google'){
+    window.open(buildGoogleCalendarLink(), '_blank', 'noopener');
+    return;
+  }
+  if(option==='apple'){
+    downloadIcs('Ekessh-Keertanaa-Wedding.ics', ics);
+    return;
+  }
+  downloadIcs('Ekessh-Keertanaa-Wedding.ics', ics);
+}
+
+/* ===================== PETALS ===================== */
+function createPetal(){
+  const p=document.createElement('div');
+  p.className='petal';
+  const sz=8+Math.random()*12;
+  p.style.width=sz+'px';
+  p.style.height=sz+'px';
+  p.style.left=Math.random()*100+'vw';
+  p.style.animationDuration=(8+Math.random()*10)+'s';
+  p.style.animationDelay=Math.random()*2+'s';
+  const colors=['rgba(233,30,99,0.6)','rgba(212,168,67,0.5)','rgba(255,111,0,0.5)','rgba(255,138,128,0.5)'];
+  p.style.background=`radial-gradient(ellipse, ${colors[Math.floor(Math.random()*colors.length)]}, transparent)`;
   document.body.appendChild(p);
-  setTimeout(() => p.remove(), 20000);
+  setTimeout(()=>p.remove(), 20000);
 }
 setInterval(createPetal, 1000);
-for (let i = 0; i < 4; i++) setTimeout(createPetal, i * 400);
+for(let i=0;i<4;i++) setTimeout(createPetal, i*400);
 </script>
-
 </body>
 </html>
