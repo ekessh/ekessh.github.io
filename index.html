@@ -35,18 +35,12 @@
     position:fixed; inset:0;
     z-index:0;
     background:linear-gradient(180deg,
-      #0b0d2e 0%,
-      #141852 10%,
-      #1a2370 20%,
-      #2a3a8f 30%,
-      #3d52a8 40%,
-      #5a70bf 50%,
-      #8ba0d4 60%,
-      #b4c4e4 70%,
-      #d4c4a0 80%,
-      #e8a86b 88%,
-      #e07040 94%,
-      #c04830 100%
+      #25306b 0%,
+      #4965b1 24%,
+      #86a7df 48%,
+      #f8cf9f 70%,
+      #f6ab79 86%,
+      #e67c54 100%
     );
   }
 
@@ -1337,12 +1331,48 @@ function triggerParticleBurst(target){
 }
 
 /* ===================== SCROLL PROGRESS ===================== */
+function updateSkyFromScroll(progressPct){
+  const progress=Math.max(0, Math.min(1, progressPct/100));
+  const top=[37,48,107];
+  const middle=[73,101,177];
+  const lowMid=[134,167,223];
+  const warm=[248,207,159];
+  const lower=[246,171,121];
+  const horizon=[230,124,84];
+
+  const noonTop=[46,139,223];
+  const noonMiddle=[102,181,241];
+  const noonLowMid=[153,209,247];
+  const noonWarm=[195,233,255];
+  const noonLower=[163,222,255];
+  const noonHorizon=[137,212,255];
+
+  const blend=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t));
+  const rgb=v=>`rgb(${v[0]}, ${v[1]}, ${v[2]})`;
+
+  const skyGradient=`linear-gradient(180deg,
+    ${rgb(blend(top,noonTop,progress))} 0%,
+    ${rgb(blend(middle,noonMiddle,progress))} 24%,
+    ${rgb(blend(lowMid,noonLowMid,progress))} 48%,
+    ${rgb(blend(warm,noonWarm,progress))} 70%,
+    ${rgb(blend(lower,noonLower,progress))} 86%,
+    ${rgb(blend(horizon,noonHorizon,progress))} 100%)`;
+
+  document.querySelector('.sky-bg').style.background=skyGradient;
+  document.getElementById('skyStars').style.opacity=String(1-progress);
+  document.querySelector('.sky-overlay').style.background=
+    `radial-gradient(ellipse at 50% 30%, rgba(10,10,26,${0.2-(0.12*progress)}) 0%, rgba(10,10,26,${0.6-(0.42*progress)}) 100%)`;
+}
+
 window.addEventListener('scroll', ()=>{
   const scrollTop=window.scrollY;
   const docHeight=document.documentElement.scrollHeight-window.innerHeight;
   const progress=(scrollTop/docHeight)*100;
   document.getElementById('scrollProgress').style.width=progress+'%';
+  updateSkyFromScroll(progress);
 });
+
+updateSkyFromScroll(0);
 
 /* ===================== COUNTDOWN ===================== */
 function updateCountdown(){
