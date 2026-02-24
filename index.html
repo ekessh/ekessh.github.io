@@ -423,17 +423,29 @@
   }
 
   .heart-divider{
-    font-size:2rem;
+    display:inline-block;
+    font-family:'Cinzel Decorative', serif;
+    font-size:1.9rem;
+    letter-spacing:0.18em;
     color:var(--rose);
     margin:1.5rem 0;
-    animation:heartbeat 1.5s ease-in-out infinite;
+    text-transform:uppercase;
+    text-shadow:0 0 18px rgba(233,30,99,0.35);
+    transform-origin:center;
+    animation:ekgSpike 2.2s linear infinite;
   }
 
-  @keyframes heartbeat{
-    0%,100%{transform:scale(1);}
-    15%{transform:scale(1.2);}
-    30%{transform:scale(1);}
-    45%{transform:scale(1.15);}
+  @keyframes ekgSpike{
+    0%, 16%, 100%{transform:translateY(0) scaleX(1);}
+    18%{transform:translateY(-2px) scaleX(1.01);}
+    21%{transform:translateY(10px) scaleX(0.98);}
+    24%{transform:translateY(-28px) scaleX(1.04);}  /* QRS upstroke */
+    27%{transform:translateY(14px) scaleX(0.97);}   /* S wave */
+    30%{transform:translateY(-6px) scaleX(1.02);}   /* rebound */
+    34%{transform:translateY(0) scaleX(1);}         /* baseline */
+    58%{transform:translateY(0) scaleX(1);}         /* flat segment */
+    63%{transform:translateY(-8px) scaleX(1.02);}   /* T wave */
+    68%{transform:translateY(0) scaleX(1);}         /* baseline */
   }
 
   /* ===================== INFO GRID ===================== */
@@ -965,7 +977,7 @@
         <div class="person-details">B.Tech., M.B.A. · AI Engineer, NxtGen Analytics (Waterloo, Canada)</div>
       </div>
 
-      <div class="heart-divider">&hearts; Weds &hearts;</div>
+      <div class="heart-divider">Weds</div>
 
       <div class="groom-bride-section">
         <div class="person-title">Sowbhagyavathi</div>
