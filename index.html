@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ekessh Weds Keertanaa</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
   :root {
     --gold: #D4A843;
@@ -51,7 +52,6 @@
     );
   }
 
-  /* Stars in upper sky */
   .sky-stars {
     position: fixed;
     top: 0; left: 0;
@@ -72,7 +72,6 @@
     50% { opacity: 0.9; }
   }
 
-  /* Clouds */
   .cloud {
     position: fixed;
     border-radius: 50%;
@@ -94,7 +93,6 @@
     to { transform: translateX(calc(100vw + 600px)); }
   }
 
-  /* Overall tint overlay for readability */
   .sky-overlay {
     position: fixed;
     top: 0; left: 0;
@@ -108,26 +106,51 @@
   #hero {
     position: relative;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     z-index: 1;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Subtle temple silhouette background */
+  #hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.18;
+    background-repeat: no-repeat;
+    background-position: left 10% bottom -20px;
+    background-size: min(900px, 80vw);
+    filter: blur(0.2px);
+    pointer-events: none;
+
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 700'%3E%3Cpath fill='%23D4A843' fill-opacity='0.55' d='M120 640h960v30H120z'/%3E%3Cpath fill='%23D4A843' fill-opacity='0.28' d='M220 640V500h50v-60h50v-60h50v-70h60v-60h60v-70h80v-60h60v-50h60v-40h30v40h60v50h60v60h80v70h60v60h60v70h50v60h50v60h50v140H220z'/%3E%3Cpath fill='%23D4A843' fill-opacity='0.22' d='M510 250h180v390H510z'/%3E%3Cpath fill='%23D4A843' fill-opacity='0.20' d='M560 300h80v340h-80z'/%3E%3C/svg%3E");
+  }
+
+  .hero-layout {
+    position: relative;
+    z-index: 2;
+    width: min(1100px, 92vw);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 2rem;
+    align-items: center;
+    overflow: visible;
   }
 
   #temple-canvas {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   .hero-gradient {
     position: absolute;
     bottom: 0; left: 0;
     width: 100%; height: 40%;
-    background: linear-gradient(to top, rgba(10,10,26,0.8), transparent);
+    background: linear-gradient(to top, rgba(10,10,26,0.85), transparent);
     z-index: 1;
     pointer-events: none;
   }
@@ -135,7 +158,34 @@
   .hero-content {
     position: relative;
     z-index: 2;
-    text-align: center;
+    text-align: left;
+  }
+
+  /* Tower anchored to the right edge, dramatic but responsive */
+  .hero-tower {
+    position: relative;
+    justify-self: end;
+    width: min(620px, 54vw);
+    height: min(560px, 74vh);
+    border-radius: 28px 0 0 28px;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 40%, rgba(212,168,67,0.10), transparent 65%);
+    box-shadow: 0 25px 80px rgba(0,0,0,0.48);
+    border: 1px solid rgba(212,168,67,0.18);
+
+    /* This pushes the tower from the centered layout to the true screen edge */
+    transform: translateX(calc((100vw - 100%) / 2));
+  }
+
+  /* Extra glow edge to make it feel "anchored" */
+  .hero-tower::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 20% 50%, rgba(240,214,138,0.18), transparent 55%);
+    mix-blend-mode: screen;
+    opacity: 0.55;
   }
 
   .hero-content .om-symbol {
@@ -208,7 +258,6 @@
     position: absolute;
     bottom: 2rem;
     z-index: 2;
-    animation: bounce 2.5s ease-in-out infinite;
     cursor: pointer;
     opacity: 0;
     animation: bounce 2.5s ease-in-out infinite, heroFadeIn 1s ease-out 3s forwards;
@@ -219,6 +268,20 @@
   @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(12px); }
+  }
+
+  @media (max-width: 800px) {
+    #hero { height: auto; padding: 5.5rem 0 3.5rem; }
+    .hero-layout { grid-template-columns: 1fr; }
+    .hero-content { text-align: center; }
+    .hero-tower {
+      width: 100%;
+      height: 360px;
+      border-radius: 22px;
+      transform: none;
+      margin-top: 1.5rem;
+    }
+    #hero::before { background-position: center bottom -20px; opacity: 0.14; }
   }
 
   /* ===================== GOLDEN PARTICLE BURST ON SCROLL ===================== */
@@ -274,8 +337,6 @@
   }
 
   /* ===================== SCROLL ANIMATIONS ===================== */
-
-  /* Fade up with scale */
   .scroll-reveal {
     opacity: 0;
     transform: translateY(50px) scale(0.95);
@@ -286,7 +347,6 @@
     transform: translateY(0) scale(1);
   }
 
-  /* Slide from left */
   .scroll-slide-left {
     opacity: 0;
     transform: translateX(-80px);
@@ -297,7 +357,6 @@
     transform: translateX(0);
   }
 
-  /* Slide from right */
   .scroll-slide-right {
     opacity: 0;
     transform: translateX(80px);
@@ -308,7 +367,6 @@
     transform: translateX(0);
   }
 
-  /* Zoom in dramatic */
   .scroll-zoom {
     opacity: 0;
     transform: scale(0.6);
@@ -319,7 +377,6 @@
     transform: scale(1);
   }
 
-  /* Rotate in */
   .scroll-rotate {
     opacity: 0;
     transform: rotate(-5deg) translateY(40px);
@@ -330,7 +387,6 @@
     transform: rotate(0deg) translateY(0);
   }
 
-  /* Stagger children */
   .stagger-children > * {
     opacity: 0;
     transform: translateY(30px);
@@ -345,7 +401,6 @@
   .stagger-children.visible > *:nth-child(7) { transition-delay: 0.9s; opacity: 1; transform: none; }
   .stagger-children.visible > *:nth-child(8) { transition-delay: 1.05s; opacity: 1; transform: none; }
 
-  /* Glowing border reveal */
   .glow-border-reveal {
     position: relative;
   }
@@ -481,7 +536,6 @@
   }
   .info-value strong { color: var(--gold-light); }
 
-  /* Calendar Icon */
   .calendar-icon {
     width: 64px; height: 68px;
     margin: 0 auto 1rem;
@@ -506,7 +560,6 @@
     color: #1a1a1a;
   }
 
-  /* Clock Icon */
   .clock-icon {
     width: 56px; height: 56px;
     margin: 0 auto 1rem;
@@ -519,7 +572,6 @@
   .clock-hand-hour { position: absolute; top: 50%; left: 50%; width: 2px; height: 14px; background: var(--gold-light); transform-origin: bottom center; transform: translate(-50%, -100%) rotate(-150deg); border-radius: 1px; }
   .clock-hand-min { position: absolute; top: 50%; left: 50%; width: 1.5px; height: 19px; background: var(--gold); transform-origin: bottom center; transform: translate(-50%, -100%) rotate(0deg); border-radius: 1px; }
 
-  /* Venue icon */
   .venue-icon-wrapper { width: 56px; height: 56px; margin: 0 auto 1rem; }
   .venue-gopuram { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
   .venue-gopuram .vg-finial { width: 4px; height: 8px; background: var(--gold); border-radius: 50% 50% 0 0; }
@@ -657,12 +709,6 @@
     pointer-events: none;
   }
 
-  /* ===================== RING SECTION ===================== */
-  #ring-section { text-align: center; padding: 3rem 1.5rem; z-index: 1; }
-  #ring-canvas { width: 100%; height: 350px; cursor: grab; }
-  #ring-canvas:active { cursor: grabbing; }
-  .interaction-hint { font-size: 0.85rem; color: rgba(255,248,231,0.5); margin-top: 0.5rem; font-style: italic; }
-
   /* ===================== FOOTER ===================== */
   footer {
     text-align: center; padding: 3rem 1.5rem 2rem;
@@ -702,15 +748,12 @@
   }
 </style>
 </head>
+
 <body>
 
-<!-- Scroll Progress Bar -->
 <div class="scroll-progress" id="scrollProgress" style="width: 0%;"></div>
-
-<!-- Particle Burst Container -->
 <div class="particle-burst" id="particleBurst"></div>
 
-<!-- ===================== SKY BACKGROUND ===================== -->
 <div class="sky-bg"></div>
 <div class="sky-stars" id="skyStars"></div>
 <div class="cloud cloud-1"></div>
@@ -722,19 +765,26 @@
 
 <!-- ===================== HERO ===================== -->
 <section id="hero">
-  <canvas id="temple-canvas"></canvas>
-  <div class="hero-gradient"></div>
-  <div class="hero-content">
-    <div class="om-symbol">ॐ</div>
-    <div class="sri-text">Sri Ramajayam</div>
-    <h1 class="couple-names">
-      Ekessh
-      <span class="amp">Weds</span>
-      Keertanaa
-    </h1>
-    <div class="wedding-date-hero">29 · May · 2026</div>
-    <div class="hero-location">Madurai, Tamil Nadu</div>
+  <div class="hero-layout">
+    <div class="hero-content">
+      <div class="om-symbol">ॐ</div>
+      <div class="sri-text">Sri Ramajayam</div>
+      <h1 class="couple-names">
+        Ekessh
+        <span class="amp">Weds</span>
+        Keertanaa
+      </h1>
+      <div class="wedding-date-hero">29 · May · 2026</div>
+      <div class="hero-location">Madurai, Tamil Nadu</div>
+    </div>
+
+    <div class="hero-tower" aria-hidden="true">
+      <canvas id="temple-canvas"></canvas>
+    </div>
   </div>
+
+  <div class="hero-gradient"></div>
+
   <div class="scroll-indicator" onclick="document.getElementById('invitation').scrollIntoView({behavior:'smooth'})">
     <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
   </div>
@@ -745,7 +795,7 @@
   <div class="parallax-glow"></div>
   <div class="parallax-quote-inner scroll-zoom">
     <div class="quote-text">"Different journeys, same destiny. Two hearts learning to beat as one."</div>
-    <div class="quote-source">— A Sacred Union —</div>
+    <div class="quote-source">A SACRED UNION</div>
   </div>
 </div>
 
@@ -756,6 +806,7 @@
       <span class="divider-line"></span><span>✦</span><span class="divider-line"></span>
     </div>
   </div>
+
   <div class="invitation-card glow-border-reveal scroll-reveal" style="transition-delay: 0.2s;">
     <div class="stagger-children" id="inviteStagger">
       <div class="parents-text">
@@ -763,6 +814,7 @@
         &<br>
         <span class="parents-name">Sri. T.K. Sarathi</span> <small>B.Com.</small>
       </div>
+
       <div class="invite-message">
         We solicit your gracious presence with family and friends<br>
         on the occasion of the marriage of our son
@@ -771,7 +823,7 @@
       <div class="groom-bride-section">
         <div class="person-title">Chiranjeevi</div>
         <div class="person-name">T.K.S. Ekessh</div>
-        <div class="person-details">B.Tech., M.B.A. — AI Engineer, NxtGen Analytics (Waterloo, Canada)</div>
+        <div class="person-details">B.Tech., M.B.A. · AI Engineer, NxtGen Analytics (Waterloo, Canada)</div>
       </div>
 
       <div class="heart-divider">❤ Weds ❤</div>
@@ -779,7 +831,7 @@
       <div class="groom-bride-section">
         <div class="person-title">Sowbhagyavathi</div>
         <div class="person-name">N.K. Keertanaa</div>
-        <div class="person-details">B.P.T. — D/o Sri. M. Karthik Babu & Smt. Julie</div>
+        <div class="person-details">B.P.T. · D/o Sri. M. Karthik Babu & Smt. Julie</div>
       </div>
     </div>
   </div>
@@ -806,7 +858,7 @@
         <div class="clock-center"></div>
       </div>
       <div class="info-label">Muhurtham</div>
-      <div class="info-value"><strong>6:00 AM — 7:25 AM</strong><br>Auspicious Hour</div>
+      <div class="info-value"><strong>6:00 AM to 7:25 AM</strong><br>Auspicious Hour</div>
     </div>
 
     <div class="info-card scroll-zoom" style="grid-column: 1 / -1;">
@@ -862,15 +914,6 @@
   </div>
 </div>
 
-<!-- ===================== RINGS ===================== -->
-<section id="ring-section">
-  <div class="scroll-zoom">
-    <h2 class="section-title">A Bond Eternal</h2>
-    <canvas id="ring-canvas"></canvas>
-    <p class="interaction-hint">✦ Drag to rotate the rings ✦</p>
-  </div>
-</section>
-
 <!-- ===================== FOOTER ===================== -->
 <footer>
   <div class="scroll-reveal">
@@ -883,7 +926,7 @@
 </footer>
 
 <script>
-// ===================== GENERATE STARS =====================
+/* ===================== GENERATE STARS ===================== */
 (function() {
   const c = document.getElementById('skyStars');
   for (let i = 0; i < 100; i++) {
@@ -894,43 +937,53 @@
     s.style.animationDelay = Math.random() * 6 + 's';
     s.style.animationDuration = (2 + Math.random() * 5) + 's';
     const sz = 1 + Math.random() * 2;
-    s.style.width = sz + 'px'; s.style.height = sz + 'px';
+    s.style.width = sz + 'px';
+    s.style.height = sz + 'px';
     c.appendChild(s);
   }
 })();
 
-// ===================== 3D MEENAKSHI TEMPLE TOWER =====================
+/* ===================== 3D MEENAKSHI TEMPLE TOWER ===================== */
 (function() {
   const canvas = document.getElementById('temple-canvas');
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  function resizeTemple() {
+    const w = canvas.clientWidth;
+    const h = canvas.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
 
   // Lighting
   const ambient = new THREE.AmbientLight(0xffeedd, 0.5);
   scene.add(ambient);
+
   const sun = new THREE.DirectionalLight(0xFFD700, 1.0);
   sun.position.set(5, 10, 5);
   scene.add(sun);
+
   const backLight = new THREE.PointLight(0xe07040, 0.6, 50);
   backLight.position.set(-5, 2, -5);
   scene.add(backLight);
+
   const rimLight = new THREE.PointLight(0x8ba0d4, 0.3, 50);
   rimLight.position.set(0, 8, -8);
   scene.add(rimLight);
 
   const tower = new THREE.Group();
 
-  // Color palette for gopuram tiers
   const tierColors = [
     0xe91e63, 0xff5722, 0xffeb3b, 0x4caf50, 0x2196f3, 0x9c27b0,
     0xf44336, 0xff9800, 0x8bc34a, 0x00bcd4, 0x673ab7, 0xe91e63,
     0x009688, 0xffc107, 0x3f51b5
   ];
 
-  // Base (entrance structure)
   const baseMat = new THREE.MeshPhongMaterial({ color: 0x795548, shininess: 30 });
   const goldMat = new THREE.MeshPhongMaterial({ color: 0xD4A843, shininess: 120, specular: 0xFFFFAA });
 
@@ -938,27 +991,24 @@
   base.position.y = 1.5;
   tower.add(base);
 
-  // Gold border on base
   const baseBorder = new THREE.Mesh(new THREE.BoxGeometry(3.7, 0.15, 2.7), goldMat);
   baseBorder.position.y = 3.05;
   tower.add(baseBorder);
 
-  // Entrance arch (dark opening)
   const archMat = new THREE.MeshPhongMaterial({ color: 0x0a0505 });
   const arch = new THREE.Mesh(new THREE.BoxGeometry(1.2, 2, 0.3), archMat);
   arch.position.set(0, 1, 1.3);
   tower.add(arch);
 
-  // Arch top (semicircle approximation)
   const archTop = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 0.3, 16, 1, false, 0, Math.PI), archMat);
   archTop.rotation.z = Math.PI / 2;
   archTop.rotation.y = Math.PI / 2;
   archTop.position.set(0, 2, 1.3);
   tower.add(archTop);
 
-  // Build 12 tiers (pyramid shape, getting smaller)
   const numTiers = 12;
   let currentY = 3.15;
+
   for (let i = 0; i < numTiers; i++) {
     const progress = i / numTiers;
     const width = 3.3 - progress * 2.4;
@@ -974,7 +1024,6 @@
     tier.position.y = currentY + height / 2;
     tower.add(tier);
 
-    // Gold separator line between tiers
     if (i < numTiers - 1) {
       const sep = new THREE.Mesh(
         new THREE.BoxGeometry(width + 0.08, 0.04, depth + 0.08),
@@ -984,7 +1033,6 @@
       tower.add(sep);
     }
 
-    // Tiny sculptures (small spheres on tier faces)
     const sculptCount = Math.max(2, Math.floor((numTiers - i) / 2));
     for (let s = 0; s < sculptCount; s++) {
       const sculptMat = new THREE.MeshPhongMaterial({
@@ -996,7 +1044,6 @@
       sculpt.position.set(xPos, currentY + height / 2, depth / 2 + 0.04);
       tower.add(sculpt);
 
-      // Back face too
       const sculptBack = sculpt.clone();
       sculptBack.position.z = -depth / 2 - 0.04;
       tower.add(sculptBack);
@@ -1005,38 +1052,32 @@
     currentY += height + 0.04;
   }
 
-  // Top dome / kalasam (finial)
   const domeMat = new THREE.MeshPhongMaterial({ color: 0xD4A843, shininess: 150, specular: 0xFFFFCC });
 
-  // Barrel shape
   const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.35, 0.6, 12), domeMat);
   barrel.position.y = currentY + 0.3;
   tower.add(barrel);
 
-  // Sphere on top
   const topSphere = new THREE.Mesh(new THREE.SphereGeometry(0.18, 12, 12), domeMat);
   topSphere.position.y = currentY + 0.75;
   tower.add(topSphere);
 
-  // Spike
   const spike = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.08, 0.5, 8), domeMat);
   spike.position.y = currentY + 1.15;
   tower.add(spike);
 
-  // Tiny gold sphere at very top
   const tipSphere = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 8), domeMat);
   tipSphere.position.y = currentY + 1.45;
   tower.add(tipSphere);
 
-  // Position and scale tower
   tower.position.y = -3;
   tower.scale.set(0.85, 0.85, 0.85);
   scene.add(tower);
 
-  // Golden particles floating around tower
   const partCount = 150;
   const partGeo = new THREE.BufferGeometry();
   const partPos = new Float32Array(partCount * 3);
+
   for (let i = 0; i < partCount; i++) {
     partPos[i * 3] = (Math.random() - 0.5) * 15;
     partPos[i * 3 + 1] = Math.random() * 15 - 3;
@@ -1050,11 +1091,9 @@
   camera.position.set(0, 3, 12);
   camera.lookAt(0, 3, 0);
 
-  // NO rotation — tower stays still; particles drift gently
   function animate() {
     requestAnimationFrame(animate);
 
-    // Gentle particle drift
     const pos = partGeo.attributes.position.array;
     for (let i = 0; i < partCount; i++) {
       pos[i * 3 + 1] += 0.003;
@@ -1065,85 +1104,25 @@
 
     renderer.render(scene, camera);
   }
+
+  resizeTemple();
   animate();
 
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
+  window.addEventListener('resize', resizeTemple);
+  new ResizeObserver(resizeTemple).observe(canvas.parentElement);
 })();
 
-// ===================== 3D RINGS =====================
+/* ===================== SCROLL ANIMATIONS ===================== */
 (function() {
-  const canvas = document.getElementById('ring-canvas');
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  scene.add(new THREE.AmbientLight(0xFFFFFF, 0.5));
-  const pl1 = new THREE.PointLight(0xFFD700, 1.5, 50); pl1.position.set(3, 5, 3); scene.add(pl1);
-  const pl2 = new THREE.PointLight(0xFFAA00, 0.8, 50); pl2.position.set(-3, 2, -2); scene.add(pl2);
-
-  const rg = new THREE.Group();
-  const rm = new THREE.MeshPhongMaterial({ color: 0xD4A843, shininess: 200, specular: 0xFFFFDD, emissive: 0x332200, emissiveIntensity: 0.1 });
-
-  const r1 = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.15, 16, 64), rm);
-  r1.rotation.x = Math.PI / 6; r1.rotation.z = -Math.PI / 8; rg.add(r1);
-
-  const r2 = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.15, 16, 64), rm.clone());
-  r2.material.color.setHex(0xF0D68A);
-  r2.rotation.x = -Math.PI / 6; r2.rotation.z = Math.PI / 8; rg.add(r2);
-
-  const dm = new THREE.Mesh(new THREE.OctahedronGeometry(0.18, 0), new THREE.MeshPhongMaterial({ color: 0xFFFFFF, shininess: 300, specular: 0xFFFFFF, transparent: true, opacity: 0.9 }));
-  dm.position.set(0, 1.2, 0.3); dm.scale.set(1, 1.3, 1); rg.add(dm);
-
-  const spkCt = 60, spkGeo = new THREE.BufferGeometry(), spkPos = new Float32Array(spkCt * 3);
-  for (let i = 0; i < spkCt; i++) { const t = Math.random() * Math.PI * 2, r = 1.2 + (Math.random() - 0.5) * 0.8; spkPos[i*3] = Math.cos(t)*r; spkPos[i*3+1] = (Math.random()-0.5)*1.5; spkPos[i*3+2] = Math.sin(t)*r; }
-  spkGeo.setAttribute('position', new THREE.BufferAttribute(spkPos, 3));
-  const spkMat = new THREE.PointsMaterial({ color: 0xFFD700, size: 0.04, transparent: true, opacity: 0.8 });
-  const spk = new THREE.Points(spkGeo, spkMat); rg.add(spk);
-
-  scene.add(rg);
-  camera.position.set(0, 1, 4.5); camera.lookAt(0, 0, 0);
-
-  let drag = false, px = 0, py = 0, rvx = 0, rvy = 0.005;
-  canvas.addEventListener('mousedown', e => { drag = true; px = e.clientX; py = e.clientY; });
-  canvas.addEventListener('mousemove', e => { if (!drag) return; rvy = (e.clientX-px)*0.005; rvx = (e.clientY-py)*0.005; px = e.clientX; py = e.clientY; });
-  canvas.addEventListener('mouseup', () => drag = false);
-  canvas.addEventListener('mouseleave', () => drag = false);
-  canvas.addEventListener('touchstart', e => { drag = true; px = e.touches[0].clientX; py = e.touches[0].clientY; });
-  canvas.addEventListener('touchmove', e => { if (!drag) return; rvy = (e.touches[0].clientX-px)*0.005; rvx = (e.touches[0].clientY-py)*0.005; px = e.touches[0].clientX; py = e.touches[0].clientY; });
-  canvas.addEventListener('touchend', () => drag = false);
-
-  (function anim() {
-    requestAnimationFrame(anim);
-    if (!drag) { rvx *= 0.95; rvy += (0.005-rvy)*0.01; }
-    rg.rotation.y += rvy; rg.rotation.x += rvx;
-    dm.rotation.y += 0.02; spk.rotation.y -= 0.003;
-    spkMat.opacity = 0.5 + Math.sin(Date.now()*0.003)*0.3;
-    renderer.render(scene, camera);
-  })();
-
-  new ResizeObserver(() => {
-    camera.aspect = canvas.clientWidth / canvas.clientHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-  }).observe(canvas.parentElement);
-})();
-
-// ===================== SCROLL ANIMATIONS =====================
-(function() {
-  const allAnimated = document.querySelectorAll('.scroll-reveal, .scroll-slide-left, .scroll-slide-right, .scroll-zoom, .scroll-rotate, .stagger-children, .glow-border-reveal');
+  const allAnimated = document.querySelectorAll(
+    '.scroll-reveal, .scroll-slide-left, .scroll-slide-right, .scroll-zoom, .scroll-rotate, .stagger-children, .glow-border-reveal'
+  );
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
 
-        // Trigger particle burst on certain sections
         if (entry.target.classList.contains('scroll-zoom') || entry.target.classList.contains('glow-border-reveal')) {
           triggerParticleBurst(entry.target);
         }
@@ -1154,7 +1133,7 @@
   allAnimated.forEach(el => observer.observe(el));
 })();
 
-// ===================== GOLDEN PARTICLE BURST =====================
+/* ===================== GOLDEN PARTICLE BURST ===================== */
 function triggerParticleBurst(target) {
   const rect = target.getBoundingClientRect();
   const cx = rect.left + rect.width / 2;
@@ -1183,7 +1162,7 @@ function triggerParticleBurst(target) {
   }
 }
 
-// ===================== SCROLL PROGRESS BAR =====================
+/* ===================== SCROLL PROGRESS BAR ===================== */
 window.addEventListener('scroll', () => {
   const scrollTop = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -1191,26 +1170,33 @@ window.addEventListener('scroll', () => {
   document.getElementById('scrollProgress').style.width = progress + '%';
 });
 
-// ===================== PARALLAX on scroll =====================
+/* ===================== PARALLAX on scroll ===================== */
 window.addEventListener('scroll', () => {
   const scrollY = window.scrollY;
-  // Sky stars parallax
   const stars = document.getElementById('skyStars');
   if (stars) stars.style.transform = `translateY(${scrollY * 0.15}px)`;
 });
 
-// ===================== COUNTDOWN =====================
+/* ===================== COUNTDOWN ===================== */
 function updateCountdown() {
-  const w = new Date('2026-05-29T06:00:00+05:30'), n = new Date(), d = w - n;
-  if (d <= 0) { ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '🎉'); return; }
+  const w = new Date('2026-05-29T06:00:00+05:30');
+  const n = new Date();
+  const d = w - n;
+
+  if (d <= 0) {
+    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => (document.getElementById(id).textContent = '🎉'));
+    return;
+  }
+
   document.getElementById('cd-days').textContent = Math.floor(d / 86400000);
   document.getElementById('cd-hours').textContent = String(Math.floor((d % 86400000) / 3600000)).padStart(2, '0');
   document.getElementById('cd-mins').textContent = String(Math.floor((d % 3600000) / 60000)).padStart(2, '0');
   document.getElementById('cd-secs').textContent = String(Math.floor((d % 60000) / 1000)).padStart(2, '0');
 }
-updateCountdown(); setInterval(updateCountdown, 1000);
+updateCountdown();
+setInterval(updateCountdown, 1000);
 
-// ===================== CALENDAR INVITE =====================
+/* ===================== CALENDAR INVITE ===================== */
 function downloadCalendarInvite(e) {
   e.preventDefault();
   const ics = [
@@ -1226,21 +1212,32 @@ function downloadCalendarInvite(e) {
     'BEGIN:VALARM','TRIGGER:-PT3H','ACTION:DISPLAY','DESCRIPTION:Wedding starts in 3 hours!','END:VALARM',
     'END:VEVENT','END:VCALENDAR'
   ].join('\r\n');
+
   const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
   a.download = 'Ekessh-Keertanaa-Wedding.ics';
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 
-// ===================== FLOATING PETALS =====================
+/* ===================== FLOATING PETALS ===================== */
 function createPetal() {
-  const p = document.createElement('div'); p.className = 'petal';
+  const p = document.createElement('div');
+  p.className = 'petal';
   const sz = 8 + Math.random() * 12;
-  p.style.width = sz + 'px'; p.style.height = sz + 'px';
+  p.style.width = sz + 'px';
+  p.style.height = sz + 'px';
   p.style.left = Math.random() * 100 + 'vw';
   p.style.animationDuration = (8 + Math.random() * 10) + 's';
   p.style.animationDelay = Math.random() * 2 + 's';
-  const colors = ['rgba(233,30,99,0.6)', 'rgba(212,168,67,0.5)', 'rgba(255,111,0,0.5)', 'rgba(255,138,128,0.5)'];
+  const colors = [
+    'rgba(233,30,99,0.6)',
+    'rgba(212,168,67,0.5)',
+    'rgba(255,111,0,0.5)',
+    'rgba(255,138,128,0.5)'
+  ];
   p.style.background = `radial-gradient(ellipse, ${colors[Math.floor(Math.random()*colors.length)]}, transparent)`;
   document.body.appendChild(p);
   setTimeout(() => p.remove(), 20000);
