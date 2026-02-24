@@ -808,11 +808,24 @@
   }
 
   /* ===================== COUNTDOWN ===================== */
-  .countdown-section{text-align:center;padding:5rem 1.5rem;position:relative;z-index:1;}
+  .countdown-section{
+    text-align:center;
+    padding:5rem 1.5rem;
+    position:relative;
+    z-index:1;
+    background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.2));
+    border-top:1px solid rgba(61,0,0,0.12);
+    border-bottom:1px solid rgba(61,0,0,0.12);
+    backdrop-filter:blur(6px);
+  }
+  .countdown-section .section-title{
+    color:#7a2f1c;
+    text-shadow:0 0 16px rgba(255,255,255,0.45);
+  }
   .countdown-grid{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-top:2rem;}
   .countdown-item{
-    background:linear-gradient(145deg, rgba(100,20,20,0.6), rgba(61,0,0,0.9));
-    border:1px solid rgba(212,168,67,0.25);
+    background:linear-gradient(145deg, rgba(255,255,255,0.5), rgba(255,255,255,0.22));
+    border:1px solid rgba(122,47,28,0.25);
     border-radius:16px;
     padding:1.5rem 2rem;
     min-width:100px;
@@ -823,32 +836,38 @@
   .countdown-number{
     font-family:'Cinzel Decorative', serif;
     font-size:2.5rem;
-    color:var(--gold);
-    text-shadow:0 0 20px rgba(212,168,67,0.4);
+    color:#7a2f1c;
+    text-shadow:0 0 16px rgba(255,255,255,0.6);
   }
   .countdown-label{
     font-size:0.85rem;
     letter-spacing:0.2em;
     text-transform:uppercase;
-    color:rgba(255,248,231,0.6);
+    color:rgba(61,0,0,0.72);
     margin-top:0.3rem;
+    font-weight:600;
   }
 
   /* ===================== FOOTER ===================== */
   footer{
     text-align:center;
     padding:3rem 1.5rem 2rem;
-    border-top:1px solid rgba(212,168,67,0.15);
+    border-top:1px solid rgba(61,0,0,0.18);
     position:relative;
     z-index:1;
+    background:rgba(255,255,255,0.24);
+    backdrop-filter:blur(8px);
   }
+  footer .divider{color:#7a2f1c;}
+  footer .divider-line{background:linear-gradient(to right, transparent, rgba(122,47,28,0.65), transparent);}
   .footer-blessing{
     font-family:'Great Vibes', cursive;
     font-size:2rem;
-    color:var(--gold);
+    color:#7a2f1c;
     margin-bottom:1rem;
+    text-shadow:0 0 14px rgba(255,255,255,0.55);
   }
-  .footer-text{font-size:0.9rem;color:rgba(255,248,231,0.5);}
+  .footer-text{font-size:0.9rem;color:rgba(61,0,0,0.75);font-weight:600;}
 
   /* ===================== FLOATING PETALS ===================== */
   .petal{
