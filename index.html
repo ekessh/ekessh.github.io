@@ -35,18 +35,12 @@
     position:fixed; inset:0;
     z-index:0;
     background:linear-gradient(180deg,
-      #0b0d2e 0%,
-      #141852 10%,
-      #1a2370 20%,
-      #2a3a8f 30%,
-      #3d52a8 40%,
-      #5a70bf 50%,
-      #8ba0d4 60%,
-      #b4c4e4 70%,
-      #d4c4a0 80%,
-      #e8a86b 88%,
-      #e07040 94%,
-      #c04830 100%
+      #25306b 0%,
+      #4965b1 24%,
+      #86a7df 48%,
+      #f8cf9f 70%,
+      #f6ab79 86%,
+      #e67c54 100%
     );
   }
 
@@ -429,17 +423,29 @@
   }
 
   .heart-divider{
-    font-size:2rem;
+    display:inline-block;
+    font-family:'Cinzel Decorative', serif;
+    font-size:1.9rem;
+    letter-spacing:0.18em;
     color:var(--rose);
     margin:1.5rem 0;
-    animation:heartbeat 1.5s ease-in-out infinite;
+    text-transform:uppercase;
+    text-shadow:0 0 18px rgba(233,30,99,0.35);
+    transform-origin:center;
+    animation:ekgSpike 2.2s linear infinite;
   }
 
-  @keyframes heartbeat{
-    0%,100%{transform:scale(1);}
-    15%{transform:scale(1.2);}
-    30%{transform:scale(1);}
-    45%{transform:scale(1.15);}
+  @keyframes ekgSpike{
+    0%, 16%, 100%{transform:translateY(0) scaleX(1);}
+    18%{transform:translateY(-2px) scaleX(1.01);}
+    21%{transform:translateY(10px) scaleX(0.98);}
+    24%{transform:translateY(-28px) scaleX(1.04);}  /* QRS upstroke */
+    27%{transform:translateY(14px) scaleX(0.97);}   /* S wave */
+    30%{transform:translateY(-6px) scaleX(1.02);}   /* rebound */
+    34%{transform:translateY(0) scaleX(1);}         /* baseline */
+    58%{transform:translateY(0) scaleX(1);}         /* flat segment */
+    63%{transform:translateY(-8px) scaleX(1.02);}   /* T wave */
+    68%{transform:translateY(0) scaleX(1);}         /* baseline */
   }
 
   /* ===================== INFO GRID ===================== */
@@ -814,11 +820,24 @@
   }
 
   /* ===================== COUNTDOWN ===================== */
-  .countdown-section{text-align:center;padding:5rem 1.5rem;position:relative;z-index:1;}
+  .countdown-section{
+    text-align:center;
+    padding:5rem 1.5rem;
+    position:relative;
+    z-index:1;
+    background:linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.2));
+    border-top:1px solid rgba(61,0,0,0.12);
+    border-bottom:1px solid rgba(61,0,0,0.12);
+    backdrop-filter:blur(6px);
+  }
+  .countdown-section .section-title{
+    color:#7a2f1c;
+    text-shadow:0 0 16px rgba(255,255,255,0.45);
+  }
   .countdown-grid{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-top:2rem;}
   .countdown-item{
-    background:linear-gradient(145deg, rgba(100,20,20,0.6), rgba(61,0,0,0.9));
-    border:1px solid rgba(212,168,67,0.25);
+    background:linear-gradient(145deg, rgba(255,255,255,0.5), rgba(255,255,255,0.22));
+    border:1px solid rgba(122,47,28,0.25);
     border-radius:16px;
     padding:1.5rem 2rem;
     min-width:100px;
@@ -829,32 +848,38 @@
   .countdown-number{
     font-family:'Cinzel Decorative', serif;
     font-size:2.5rem;
-    color:var(--gold);
-    text-shadow:0 0 20px rgba(212,168,67,0.4);
+    color:#7a2f1c;
+    text-shadow:0 0 16px rgba(255,255,255,0.6);
   }
   .countdown-label{
     font-size:0.85rem;
     letter-spacing:0.2em;
     text-transform:uppercase;
-    color:rgba(255,248,231,0.6);
+    color:rgba(61,0,0,0.72);
     margin-top:0.3rem;
+    font-weight:600;
   }
 
   /* ===================== FOOTER ===================== */
   footer{
     text-align:center;
     padding:3rem 1.5rem 2rem;
-    border-top:1px solid rgba(212,168,67,0.15);
+    border-top:1px solid rgba(61,0,0,0.18);
     position:relative;
     z-index:1;
+    background:rgba(255,255,255,0.24);
+    backdrop-filter:blur(8px);
   }
+  footer .divider{color:#7a2f1c;}
+  footer .divider-line{background:linear-gradient(to right, transparent, rgba(122,47,28,0.65), transparent);}
   .footer-blessing{
     font-family:'Great Vibes', cursive;
     font-size:2rem;
-    color:var(--gold);
+    color:#7a2f1c;
     margin-bottom:1rem;
+    text-shadow:0 0 14px rgba(255,255,255,0.55);
   }
-  .footer-text{font-size:0.9rem;color:rgba(255,248,231,0.5);}
+  .footer-text{font-size:0.9rem;color:rgba(61,0,0,0.75);font-weight:600;}
 
   /* ===================== FLOATING PETALS ===================== */
   .petal{
@@ -952,7 +977,7 @@
         <div class="person-details">B.Tech., M.B.A. · AI Engineer, NxtGen Analytics (Waterloo, Canada)</div>
       </div>
 
-      <div class="heart-divider">&hearts; Weds &hearts;</div>
+      <div class="heart-divider">Weds</div>
 
       <div class="groom-bride-section">
         <div class="person-title">Sowbhagyavathi</div>
@@ -1337,12 +1362,48 @@ function triggerParticleBurst(target){
 }
 
 /* ===================== SCROLL PROGRESS ===================== */
+function updateSkyFromScroll(progressPct){
+  const progress=Math.max(0, Math.min(1, progressPct/100));
+  const top=[37,48,107];
+  const middle=[73,101,177];
+  const lowMid=[134,167,223];
+  const warm=[248,207,159];
+  const lower=[246,171,121];
+  const horizon=[230,124,84];
+
+  const noonTop=[46,139,223];
+  const noonMiddle=[102,181,241];
+  const noonLowMid=[153,209,247];
+  const noonWarm=[195,233,255];
+  const noonLower=[163,222,255];
+  const noonHorizon=[137,212,255];
+
+  const blend=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t));
+  const rgb=v=>`rgb(${v[0]}, ${v[1]}, ${v[2]})`;
+
+  const skyGradient=`linear-gradient(180deg,
+    ${rgb(blend(top,noonTop,progress))} 0%,
+    ${rgb(blend(middle,noonMiddle,progress))} 24%,
+    ${rgb(blend(lowMid,noonLowMid,progress))} 48%,
+    ${rgb(blend(warm,noonWarm,progress))} 70%,
+    ${rgb(blend(lower,noonLower,progress))} 86%,
+    ${rgb(blend(horizon,noonHorizon,progress))} 100%)`;
+
+  document.querySelector('.sky-bg').style.background=skyGradient;
+  document.getElementById('skyStars').style.opacity=String(1-progress);
+  document.querySelector('.sky-overlay').style.background=
+    `radial-gradient(ellipse at 50% 30%, rgba(10,10,26,${0.2-(0.12*progress)}) 0%, rgba(10,10,26,${0.6-(0.42*progress)}) 100%)`;
+}
+
 window.addEventListener('scroll', ()=>{
   const scrollTop=window.scrollY;
   const docHeight=document.documentElement.scrollHeight-window.innerHeight;
   const progress=(scrollTop/docHeight)*100;
   document.getElementById('scrollProgress').style.width=progress+'%';
+  updateSkyFromScroll(progress);
 });
+
+updateSkyFromScroll(0);
 
 /* ===================== COUNTDOWN ===================== */
 function updateCountdown(){
