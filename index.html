@@ -13,7 +13,6 @@
 <meta name="twitter:title" content="Ekessh Weds Keertanaa · 29 May 2026" />
 <meta name="twitter:description" content="You are cordially invited to celebrate the union of Ekessh and Keertanaa on 29 May 2026 in Madurai, Tamil Nadu." />
 <meta name="twitter:image" content="caricature.png" />
-<script defer src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -227,7 +226,7 @@ section {
   transform: translateX(calc((100vw - 100%) / 2));
 }
 
-#temple-canvas { width: 100%; height: 100%; display: block; }
+.temple-img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center top; }
 
 .hero-gradient {
   position: absolute; bottom: 0; left: 0;
@@ -805,8 +804,7 @@ footer .divider-line {
     </div>
 
     <div class="hero-tower" aria-hidden="true">
-      <canvas id="temple-canvas"></canvas>
-      <div id="temple-fallback" style="display:none;width:100%;height:100%;background:linear-gradient(135deg,rgba(201,168,76,0.15),rgba(201,168,76,0.05));border-radius:28px 0 0 28px;display:flex;align-items:center;justify-content:center;"><span style="font-family:'Cinzel Decorative',serif;color:var(--gold);font-size:3rem;opacity:0.4;">ॐ</span></div>
+      <img class="temple-img" src="IMG_5999.jpg" alt="Temple gopuram in Madurai" loading="eager">
       <div class="hero-gradient"></div>
     </div>
   </div>
@@ -1071,149 +1069,6 @@ footer .divider-line {
 </footer>
 
 <script>
-
-/* ===================== 3D TOWER ===================== */
-document.addEventListener('DOMContentLoaded', function(){
-(function(){
-  const canvas=document.getElementById('temple-canvas');
-  const scene=new THREE.Scene();
-  const camera=new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
-  let renderer;
-  try {
-    renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
-  } catch(e) {
-    canvas.style.display = 'none';
-    document.getElementById('temple-fallback').style.display = 'flex';
-    return;
-  }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-  function resizeTemple(){
-    const w=canvas.clientWidth;
-    const h=canvas.clientHeight;
-    if(!w || !h) return;
-    renderer.setSize(w, h, false);
-    camera.aspect=w/h;
-    camera.updateProjectionMatrix();
-  }
-
-  scene.add(new THREE.AmbientLight(0xffeedd, 0.5));
-  const sun=new THREE.DirectionalLight(0xFFD700, 1.0); sun.position.set(5,10,5); scene.add(sun);
-  const back=new THREE.PointLight(0xe07040, 0.6, 50); back.position.set(-5,2,-5); scene.add(back);
-  const rim=new THREE.PointLight(0x8ba0d4, 0.3, 50); rim.position.set(0,8,-8); scene.add(rim);
-
-  const tower=new THREE.Group();
-  const tierColors=[0xe91e63,0xff5722,0xffeb3b,0x4caf50,0x2196f3,0x9c27b0,0xf44336,0xff9800,0x8bc34a,0x00bcd4,0x673ab7,0xe91e63,0x009688,0xffc107,0x3f51b5];
-
-  const baseMat=new THREE.MeshPhongMaterial({color:0x795548, shininess:30});
-  const goldMat=new THREE.MeshPhongMaterial({color:0xD4A843, shininess:120, specular:0xFFFFAA});
-
-  const base=new THREE.Mesh(new THREE.BoxGeometry(3.5,3,2.5), baseMat);
-  base.position.y=1.5; tower.add(base);
-
-  const baseBorder=new THREE.Mesh(new THREE.BoxGeometry(3.7,0.15,2.7), goldMat);
-  baseBorder.position.y=3.05; tower.add(baseBorder);
-
-  const archMat=new THREE.MeshPhongMaterial({color:0x0a0505});
-  const arch=new THREE.Mesh(new THREE.BoxGeometry(1.2,2,0.3), archMat);
-  arch.position.set(0,1,1.3); tower.add(arch);
-
-  const archTop=new THREE.Mesh(new THREE.CylinderGeometry(0.6,0.6,0.3,16,1,false,0,Math.PI), archMat);
-  archTop.rotation.z=Math.PI/2; archTop.rotation.y=Math.PI/2;
-  archTop.position.set(0,2,1.3); tower.add(archTop);
-
-  const numTiers=12;
-  let currentY=3.15;
-
-  for(let i=0;i<numTiers;i++){
-    const progress=i/numTiers;
-    const width=3.3-progress*2.4;
-    const depth=2.3-progress*1.6;
-    const height=0.55-progress*0.02;
-
-    const mat=new THREE.MeshPhongMaterial({color:tierColors[i%tierColors.length], shininess:40});
-    const tier=new THREE.Mesh(new THREE.BoxGeometry(width,height,depth), mat);
-    tier.position.y=currentY+height/2; tower.add(tier);
-
-    if(i<numTiers-1){
-      const sep=new THREE.Mesh(new THREE.BoxGeometry(width+0.08,0.04,depth+0.08), goldMat);
-      sep.position.y=currentY+height+0.02; tower.add(sep);
-    }
-
-    const sculptCount=Math.max(2, Math.floor((numTiers-i)/2));
-    for(let s=0;s<sculptCount;s++){
-      const sculptMat=new THREE.MeshPhongMaterial({color:tierColors[(i+s+3)%tierColors.length], shininess:20});
-      const sculpt=new THREE.Mesh(new THREE.SphereGeometry(0.06,6,6), sculptMat);
-      const xPos=-width/2+0.2+(s/(sculptCount-1||1))*(width-0.4);
-      sculpt.position.set(xPos, currentY+height/2, depth/2+0.04);
-      tower.add(sculpt);
-
-      const sculptBack=sculpt.clone();
-      sculptBack.position.z=-depth/2-0.04;
-      tower.add(sculptBack);
-    }
-
-    currentY+=height+0.04;
-  }
-
-  const domeMat=new THREE.MeshPhongMaterial({color:0xD4A843, shininess:150, specular:0xFFFFCC});
-  const barrel=new THREE.Mesh(new THREE.CylinderGeometry(0.2,0.35,0.6,12), domeMat);
-  barrel.position.y=currentY+0.3; tower.add(barrel);
-
-  const topSphere=new THREE.Mesh(new THREE.SphereGeometry(0.18,12,12), domeMat);
-  topSphere.position.y=currentY+0.75; tower.add(topSphere);
-
-  const spike=new THREE.Mesh(new THREE.CylinderGeometry(0.02,0.08,0.5,8), domeMat);
-  spike.position.y=currentY+1.15; tower.add(spike);
-
-  const tipSphere=new THREE.Mesh(new THREE.SphereGeometry(0.06,8,8), domeMat);
-  tipSphere.position.y=currentY+1.45; tower.add(tipSphere);
-
-  tower.position.y=-3;
-  tower.scale.set(0.85,0.85,0.85);
-  scene.add(tower);
-
-  const partCount=150;
-  const partGeo=new THREE.BufferGeometry();
-  const partPos=new Float32Array(partCount*3);
-
-  for(let i=0;i<partCount;i++){
-    partPos[i*3]=(Math.random()-0.5)*15;
-    partPos[i*3+1]=Math.random()*15-3;
-    partPos[i*3+2]=(Math.random()-0.5)*15;
-  }
-  partGeo.setAttribute('position', new THREE.BufferAttribute(partPos,3));
-  const partMat=new THREE.PointsMaterial({color:0xFFD700, size:0.04, transparent:true, opacity:0.5});
-  const particles=new THREE.Points(partGeo, partMat);
-  scene.add(particles);
-
-  camera.position.set(0,3,12);
-  camera.lookAt(0,3,0);
-
-  function animate(){
-    requestAnimationFrame(animate);
-
-    const pos=partGeo.attributes.position.array;
-    for(let i=0;i<partCount;i++){
-      pos[i*3+1]+=0.003;
-      if(pos[i*3+1]>12) pos[i*3+1]=-3;
-    }
-    partGeo.attributes.position.needsUpdate=true;
-    particles.rotation.y+=0.0005;
-    renderer.render(scene, camera);
-  }
-
-  resizeTemple();
-  animate();
-
-  window.addEventListener('resize', resizeTemple);
-  new ResizeObserver(resizeTemple).observe(canvas.parentElement);
-})();
-});
-
-
-
-
 
 /* ===================== SCROLL REVEAL ===================== */
 (function(){
