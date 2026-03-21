@@ -1189,6 +1189,13 @@ function buildWeddingIcs(){
     'LOCATION:Ekessh Mandapam (Agarwal Bhavan) and Keertanaa Mandapam (Aaru Nadu Arangam)',
     'URL:'+groomMap,
     'STATUS:CONFIRMED',
+
+    'BEGIN:VALARM',
+    'TRIGGER:-P7D',
+    'ACTION:DISPLAY',
+    'DESCRIPTION:Reception starts in one week.',
+    'END:VALARM',
+
     'END:VEVENT',
 
     'BEGIN:VEVENT',
@@ -1203,15 +1210,9 @@ function buildWeddingIcs(){
     'STATUS:CONFIRMED',
 
     'BEGIN:VALARM',
-    'TRIGGER:-P1D',
+    'TRIGGER:-P7D',
     'ACTION:DISPLAY',
-    'DESCRIPTION:Wedding celebrations are tomorrow.',
-    'END:VALARM',
-
-    'BEGIN:VALARM',
-    'TRIGGER:-PT3H',
-    'ACTION:DISPLAY',
-    'DESCRIPTION:Wedding starts in 3 hours.',
+    'DESCRIPTION:Wedding starts in one week.',
     'END:VALARM',
 
     'END:VEVENT',
@@ -1234,29 +1235,29 @@ function buildGoogleCalendarLink(){
   const groomMap='https://maps.app.goo.gl/FQKFRbEKMEjorat6A';
   const brideMap='https://maps.app.goo.gl/nCtcwhEfbF7FTLUS7';
 
-  const start='20260529T003000Z'; // 06:00 IST
-  const end='20260529T015500Z';   // 07:25 IST
-
-  const title=encodeURIComponent('Wedding of Ekessh and Keertanaa');
-
-  const details=encodeURIComponent(
+  const commonDetails=encodeURIComponent(
     'Venues (Google Maps):\n'+
     'Ekessh Mandapam, Agarwal Bhavan: '+groomMap+'\n'+
     'Keertanaa Mandapam, Aaru Nadu Arangam: '+brideMap+'\n\n'+
     'Gathering:\n'+
     'Ekessh relatives at Ekessh Mandapam.\n'+
     'Keertanaa relatives at Keertanaa Mandapam.\n\n'+
-    'Reception: May 28, 6:00 PM, shared rituals across both venues.\n'+
-    'Wedding: May 29, Kasi Yatra begins, then marriage at Keertanaa Mandapam during Muhurtham.'
+    'Please set a popup reminder for 1 week before this event after opening in Google Calendar.'
   );
 
-  const location=encodeURIComponent('Aaru Nadu Arangam, Madurai, Tamil Nadu, India (Keertanaa Mandapam)');
+  const receptionLink='https://calendar.google.com/calendar/render?action=TEMPLATE' +
+    '&text=' + encodeURIComponent('Reception of Ekessh and Keertanaa') +
+    '&dates=20260528T123000Z/20260528T153000Z' + // 06:00 PM - 09:00 PM IST
+    '&details=' + commonDetails +
+    '&location=' + encodeURIComponent('Ekessh Mandapam (Agarwal Bhavan) and Keertanaa Mandapam (Aaru Nadu Arangam), Madurai, Tamil Nadu, India');
 
-  return 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
-    '&text=' + title +
-    '&dates=' + start + '/' + end +
-    '&details=' + details +
-    '&location=' + location;
+  const weddingLink='https://calendar.google.com/calendar/render?action=TEMPLATE' +
+    '&text=' + encodeURIComponent('Wedding of Ekessh and Keertanaa') +
+    '&dates=20260529T003000Z/20260529T015500Z' + // 06:00 AM - 07:25 AM IST
+    '&details=' + commonDetails +
+    '&location=' + encodeURIComponent('Aaru Nadu Arangam, Madurai, Tamil Nadu, India (Keertanaa Mandapam)');
+
+  return {receptionLink, weddingLink};
 }
 
 function handleCalendarChoice(){
@@ -1264,10 +1265,12 @@ function handleCalendarChoice(){
   const ics=buildWeddingIcs();
 
   if(option==='google'){
-    window.open(buildGoogleCalendarLink(), '_blank', 'noopener,noreferrer');
+    const links=buildGoogleCalendarLink();
+    window.open(links.receptionLink, '_blank', 'noopener,noreferrer');
+    setTimeout(()=>window.open(links.weddingLink, '_blank', 'noopener,noreferrer'), 250);
     return;
   }
-  downloadIcs('Ekessh-Keertanaa-Wedding.ics', ics);
+  downloadIcs('Ekessh-Keertanaa-Reception-and-Wedding.ics', ics);
 }
 
 /* ===================== PETALS ===================== */
